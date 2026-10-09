@@ -1,0 +1,52 @@
+diff --git a/api/server/index.js b/api/server/index.js
+index 5f50c0d..7dfb6b7 100644
+--- a/api/server/index.js
++++ b/api/server/index.js
+@@ -8,7 +8,6 @@ const cors = require('cors');
+ const axios = require('axios');
+ const express = require('express');
+ const passport = require('passport');
+-const compression = require('compression');
+ const cookieParser = require('cookie-parser');
+ const mongoSanitize = require('express-mongo-sanitize');
+ const { logger, runAsSystem } = require('@librechat/data-schemas');
+@@ -323,7 +322,7 @@ const startServer = async () => {
+   app.use(cookieParser());
+ 
+   if (!isEnabled(DISABLE_COMPRESSION)) {
+-    app.use(compression());
++    app.use(express.compression());
+   } else {
+     console.warn('Response compression has been disabled via DISABLE_COMPRESSION.');
+   }
+diff --git a/api/server/utils/staticCache.js b/api/server/utils/staticCache.js
+index f5d1af5..931e909 100644
+--- a/api/server/utils/staticCache.js
++++ b/api/server/utils/staticCache.js
+@@ -1,6 +1,5 @@
+ const path = require('path');
+ const express = require('express');
+-const expressStaticGzip = require('express-static-gzip');
+ 
+ const oneDayInSeconds = 24 * 60 * 60;
+ 
+@@ -19,7 +18,6 @@ const isEnabled = (value) => value === true || String(value).toLowerCase() === '
+  */
+ function staticCache(staticPath, options = {}) {
+   const { noCache = false, skipGzipScan = false } = options;
+-  const enableBrotli = isEnabled(process.env.ENABLE_STATIC_ASSET_BROTLI);
+ 
+   const setHeaders = (res, filePath) => {
+     if (res.locals?.privateImageCache) {
+@@ -58,9 +56,8 @@ function staticCache(staticPath, options = {}) {
+       index: false,
+     });
+   } else {
+-    return expressStaticGzip(staticPath, {
+-      enableBrotli,
+-      orderPreference: enableBrotli ? ['br', 'gz'] : ['gz'],
++    return express.static(staticPath, {
++      preCompressed: true,
+       setHeaders,
+       index: false,
+     });

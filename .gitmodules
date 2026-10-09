@@ -1,0 +1,12 @@
+[submodule "actual"]
+	path = actual
+	url = https://github.com/actualbudget/actual.git
+	shallow = true
+[submodule "librechat"]
+	path = librechat
+	url = https://github.com/danny-avila/LibreChat.git
+	shallow = true
+[submodule "n8n"]
+	path = n8n
+	url = https://github.com/n8n-io/n8n.git
+	shallow = true

@@ -1,0 +1,101 @@
+{
+    "n8n": {
+        "pm": "pnpm",
+        "install": "npx --yes pnpm@11.22.0 install --frozen-lockfile",
+        "build": "npx --yes pnpm@11.22.0 --filter \"n8n...\" build",
+        "cwd": "packages/cli",
+        "test": "N8N_LOG_LEVEL=silent DB_SQLITE_POOL_SIZE=4 DB_TYPE=sqlite npx vitest run --config vitest.config.integration.ts",
+        "summary": "(?:Tests|Test Files)\\s+.*",
+        "failPattern": "^\\s*(?:×|FAIL)(.*)$",
+        "notes": "express 5.1.0 from the pnpm catalog. Needs core.longpaths for the clone, pnpm 11.22 (their engines floor), and packages/cli built along with its dependencies: without its dist an eventbus worker cannot start and takes whatever test was running down with it."
+    },
+    "n8n-smoke": {
+        "pm": "pnpm",
+        "install": null,
+        "build": null,
+        "cwd": "packages/cli",
+        "test": "N8N_LOG_LEVEL=silent DB_SQLITE_POOL_SIZE=4 DB_TYPE=sqlite npx vitest run --config vitest.config.integration.ts auth.api",
+        "summary": "(?:Tests|Test Files)\\s+.*",
+        "failPattern": "^\\s*(?:×|FAIL)(.*)$",
+        "notes": "the same n8n clone, only the auth.api integration files, to check an arm boots before spending an hour on it",
+        "dir": "n8n"
+    },
+    "actual": {
+        "pm": "yarn",
+        "install": "node .yarn/releases/yarn-4.17.1.cjs install",
+        "cwd": "packages/sync-server",
+        "test": "NODE_ENV=test NODE_OPTIONS='--experimental-vm-modules --trace-warnings' npx vitest --run",
+        "exclude": [
+            "webpack-dev-server"
+        ],
+        "summary": "(?:Tests|Test Files)\\s+.*",
+        "failPattern": "^\\s*(?:×|FAIL)(.*)$",
+        "notes": "express 5.2.1 hoisted at the root of a yarn 4 workspace, so one directory is the whole swap. webpack-dev-server keeps an express 4 of its own that the server tests never load, hence the exclude. Their tests send a body with GET and DELETE, which Express reads on any verb and this project reads only for POST, PUT, PATCH and QUERY unless told: `body methods` says so here, so that what is compared is everything else.",
+        "fulmineSettings": {
+            "body methods": [
+                "GET",
+                "HEAD",
+                "DELETE",
+                "OPTIONS",
+                "TRACE",
+                "CONNECT",
+                "SEARCH"
+            ]
+        }
+    },
+    "librechat": {
+        "pm": "npm",
+        "install": "npm install --no-audit --no-fund",
+        "dir": "librechat",
+        "cwd": "api",
+        "test": "NODE_ENV=test npx jest --ci",
+        "summary": "Tests:.*|Test Suites:.*",
+        "failPattern": "^\\s*(?:×|FAIL)(.*)$",
+        "notes": "express 5.2.1 hoisted at the root of the npm workspace. The api tests bring their own mongod through mongodb-memory-server, so nothing has to be installed for them. The api tests import @librechat/api and the other workspace packages from their dist, so those are built first or 212 of the 232 suites fail on the import alone. Their DELETE routes take a JSON filter in the body, which Express reads on any verb: `body methods` says so here too.",
+        "build": "npm run build:data-provider && npm run build:data-schemas && npm run build:api",
+        "fulmineSettings": {
+            "body methods": [
+                "GET",
+                "HEAD",
+                "DELETE",
+                "OPTIONS",
+                "TRACE",
+                "CONNECT",
+                "SEARCH"
+            ]
+        }
+    },
+    "librechat-one": {
+        "pm": "npm",
+        "install": null,
+        "dir": "librechat",
+        "cwd": "api",
+        "test": "NODE_ENV=test npx jest --ci --forceExit --testTimeout=20000 files.test",
+        "summary": "Tests:.*|Test Suites:.*",
+        "failPattern": "^\\s*(?:×|FAIL)(.*)$",
+        "notes": "one file, to see whether the download-abort test is ours",
+        "build": null,
+        "fulmineSettings": {
+            "body methods": [
+                "GET",
+                "HEAD",
+                "DELETE",
+                "OPTIONS",
+                "TRACE",
+                "CONNECT",
+                "SEARCH"
+            ]
+        }
+    },
+    "n8n-recheck": {
+        "pm": "pnpm",
+        "install": null,
+        "build": null,
+        "cwd": "packages/cli",
+        "test": "N8N_LOG_LEVEL=silent DB_SQLITE_POOL_SIZE=4 DB_TYPE=sqlite npx vitest run --config vitest.config.integration.ts form-trigger-submit-gate.api endpoints-with-scopes-enabled security-policy instance-risk-reporter",
+        "summary": "(?:Tests|Test Files)\\s+.*",
+        "failPattern": "^\\s*(?:×|FAIL)(.*)$",
+        "notes": "the four files that failed on fulmine and not on express 5 in the full run, alone on an idle machine: the full run times out tests at 10 s on all three arms, and not always the same ones",
+        "dir": "n8n"
+    }
+}

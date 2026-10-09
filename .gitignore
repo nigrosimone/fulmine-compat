@@ -1,0 +1,11 @@
+# the projects under test are submodules, and what they install and build stays in them
+
+# made by the runners
+/arms/
+/node24/
+/mongodb-linux-*/
+node_modules/
+
+# raw logs: the .json beside each one is the result
+/results/**/*.log
+/out/

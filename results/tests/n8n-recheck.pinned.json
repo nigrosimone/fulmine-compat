@@ -1,0 +1,24 @@
+{
+  "arm": "pinned",
+  "code": 1,
+  "ms": 77788,
+  "summary": [
+    "Test Files  3 failed | 1 passed (4)",
+    "Tests  6 failed | 91 passed (97)",
+    "Tests 6 ⎯⎯⎯⎯⎯⎯⎯"
+  ],
+  "failures": [
+    "FAIL  test/integration/public-api/endpoints-with-scopes-enabled.test.ts > Public API endpoints with API key scopes > API key scope enforcement > users > GET /user > should fail to return the user when API key doesn't have \"user:read\" scope",
+    "FAIL  test/integration/public-api/endpoints-with-scopes-enabled.test.ts > Public API endpoints with API key scopes > API key scope enforcement > users > GET /user > should return the user when API key has \"user:read\" scope",
+    "FAIL  test/integration/public-api/security-policy.test.ts > Security policy in Public API > GET /settings/security-policy > returns the current policy when licensed",
+    "FAIL  test/integration/public-api/security-policy.test.ts > Security policy in Public API > GET /settings/security-policy > still allows reads when the policy is env-managed",
+    "FAIL  test/integration/security-audit/instance-risk-reporter.test.ts > should not report webhooks having basic or header auth",
+    "FAIL  test/integration/security-audit/instance-risk-reporter.test.ts > should report webhook lacking authentication",
+    "× returns the current policy when licensed",
+    "× should fail to return the user when API key doesn't have \"user:read\" scope",
+    "× should not report webhooks having basic or header auth",
+    "× should report webhook lacking authentication",
+    "× should return the user when API key has \"user:read\" scope",
+    "× still allows reads when the policy is env-managed"
+  ]
+}

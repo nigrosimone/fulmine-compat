@@ -1,0 +1,42 @@
+{
+  "arm": "express5",
+  "code": 1,
+  "ms": 1228786,
+  "summary": [
+    "Test Files  11 failed | 309 passed | 3 skipped (323)",
+    "Tests  14 failed | 6123 passed | 33 skipped (6170)",
+    "Tests 14 ⎯⎯⎯⎯⎯⎯⎯"
+  ],
+  "failures": [
+    "FAIL  src/modules/instance-ai/repositories/__tests__/instance-ai-checkpoint.repository.integration.test.ts > InstanceAiCheckpointRepository.claimSuspendedForResume",
+    "FAIL  test/integration/database/repositories/agent-channel-status.repository.test.ts > AgentChannelStatusRepository",
+    "FAIL  test/integration/execution-redaction.test.ts > GET /api/v1/executions/:id — Execution Redaction > policy-based redaction (includeData=true) > policy \"none\" with trigger mode — returns unredacted",
+    "FAIL  test/integration/public-api/credentials.test.ts > POST /credentials > should create credential in a team project when projectId is provided",
+    "FAIL  test/integration/public-api/credentials.test.ts > POST /credentials > should create credentials",
+    "FAIL  test/integration/public-api/data-tables.test.ts > GET /data-tables > should list data tables",
+    "FAIL  test/integration/public-api/data-tables.test.ts > GET /data-tables > should paginate data tables",
+    "FAIL  test/integration/public-api/endpoints-with-scopes-enabled.test.ts > Public API endpoints with API key scopes > API key scope enforcement > users > GET /user > should fail to return the user when API key doesn't have \"user:read\" scope",
+    "FAIL  test/integration/public-api/endpoints-with-scopes-enabled.test.ts > Public API endpoints with API key scopes > API key scope enforcement > users > GET /user > should return the user when API key has \"user:read\" scope",
+    "FAIL  test/integration/public-api/executions.test.ts > GET /executions/:id > owner should be able to get an execution owned by him",
+    "FAIL  test/integration/public-api/executions.test.ts > GET /executions/:id > owner should be able to read executions of other users",
+    "FAIL  test/integration/public-api/folders.test.ts > POST /projects/:projectId/folders > should return 403 when API key is missing folder:create scope",
+    "FAIL  test/integration/public-api/folders.test.ts > POST /projects/:projectId/folders > should return 403 when feature is not licensed",
+    "FAIL  test/integration/public-api/log-streaming.test.ts > Log streaming in Public API > authorization > 'GET event-types' returns 403 without a log streaming scope",
+    "FAIL  test/integration/public-api/projects.test.ts > Projects in Public API > GET /projects > if licensed, should return all projects with pagination",
+    "FAIL  test/integration/public-api/workflows.test.ts > GET /workflows > should return workflows ordered by id",
+    "× 'GET event-types' returns 403 without a log streaming scope",
+    "× if licensed, should return all projects with pagination",
+    "× owner should be able to get an execution owned by him",
+    "× owner should be able to read executions of other users",
+    "× policy \"none\" with trigger mode — returns unredacted",
+    "× should create credential in a team project when projectId is provided",
+    "× should create credentials",
+    "× should fail to return the user when API key doesn't have \"user:read\" scope",
+    "× should list data tables",
+    "× should paginate data tables",
+    "× should return 403 when API key is missing folder:create scope",
+    "× should return 403 when feature is not licensed",
+    "× should return the user when API key has \"user:read\" scope",
+    "× should return workflows ordered by id"
+  ]
+}

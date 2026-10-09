@@ -1,0 +1,3610 @@
+{
+  "project": "actual",
+  "title": "Actual Budget, sync server",
+  "env": {
+    "date": "2026-10-09T16:46:06.188Z",
+    "cpu": "Neoverse-N1",
+    "kernel": "6.17.0-1018-oracle",
+    "node": "v24.18.1",
+    "fulmine": "5.22.0",
+    "express": "5.2.1",
+    "opts": {
+      "rounds": 5,
+      "duration": 10,
+      "warmup": 5,
+      "connections": 50,
+      "threads": 2,
+      "serverCpu": "1",
+      "loadCpus": "2-3",
+      "sideCpu": "0",
+      "rateShare": 0.5,
+      "scenario": null,
+      "nullRun": false,
+      "tuned": true,
+      "keep": false
+    }
+  },
+  "arms": [
+    "express",
+    "fulmine-tuned"
+  ],
+  "scenarios": [
+    {
+      "name": "health",
+      "what": "GET /health, the container health check",
+      "date": "2026-10-09T16:46:06.205Z",
+      "check": {
+        "seen": {
+          "express": {
+            "status": 200,
+            "bytes": 15,
+            "type": "application/json; charset=utf-8"
+          },
+          "fulmine-tuned": {
+            "status": 200,
+            "bytes": 15,
+            "type": "application/json; charset=utf-8"
+          }
+        },
+        "problems": []
+      },
+      "saturation": [
+        {
+          "express": {
+            "requests": 37468,
+            "rps": 3709.65,
+            "bad": 0,
+            "bytes": 13295943.68,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 13.3,
+              "p90": 13.74,
+              "p99": 41.99
+            },
+            "cpuMs": 10100,
+            "cpuShare": 0.9986911553194844,
+            "usPerReq": 269.5633607344934,
+            "bytesPerReq": 354.86131312052953,
+            "instrPerReq": 354849.9996797267,
+            "rss": 302
+          },
+          "fulmine-tuned": {
+            "requests": 75541,
+            "rps": 7479.38,
+            "bad": 0,
+            "bytes": 26895974.4,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 6.54,
+              "p90": 6.71,
+              "p99": 13.02
+            },
+            "cpuMs": 10100,
+            "cpuShare": 0.9991285658024773,
+            "usPerReq": 133.702227929204,
+            "bytesPerReq": 356.04472273335006,
+            "instrPerReq": 220041.51160297057,
+            "rss": 305
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 76589,
+            "rps": 7583.77,
+            "bad": 0,
+            "bytes": 27262976,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 6.55,
+              "p90": 6.71,
+              "p99": 8.36
+            },
+            "cpuMs": 10100,
+            "cpuShare": 0.9992821294706847,
+            "usPerReq": 131.87272323701836,
+            "bytesPerReq": 355.96464244212615,
+            "instrPerReq": 215952.75689720456,
+            "rss": 305
+          },
+          "express": {
+            "requests": 37380,
+            "rps": 3700.96,
+            "bad": 0,
+            "bytes": 13274972.16,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 13.25,
+              "p90": 13.67,
+              "p99": 47.92
+            },
+            "cpuMs": 10110,
+            "cpuShare": 0.9996278723584257,
+            "usPerReq": 270.46548956661314,
+            "bytesPerReq": 355.13569181380416,
+            "instrPerReq": 357585.96289459604,
+            "rss": 301
+          }
+        },
+        {
+          "express": {
+            "requests": 37783,
+            "rps": 3741.13,
+            "bad": 0,
+            "bytes": 13411287.04,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 13.14,
+              "p90": 13.54,
+              "p99": 46.39
+            },
+            "cpuMs": 10100,
+            "cpuShare": 0.9987700736904619,
+            "usPerReq": 267.31598867215416,
+            "bytesPerReq": 354.9555895508562,
+            "instrPerReq": 356744.04589365586,
+            "rss": 304
+          },
+          "fulmine-tuned": {
+            "requests": 73845,
+            "rps": 7311.88,
+            "bad": 0,
+            "bytes": 26277314.56,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 6.78,
+              "p90": 6.97,
+              "p99": 8.84
+            },
+            "cpuMs": 10100,
+            "cpuShare": 0.9992503512067932,
+            "usPerReq": 136.772970410996,
+            "bytesPerReq": 355.84419473220936,
+            "instrPerReq": 217848.60135418782,
+            "rss": 308
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 75288,
+            "rps": 7454.75,
+            "bad": 0,
+            "bytes": 26791116.8,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 6.64,
+              "p90": 6.76,
+              "p99": 8.48
+            },
+            "cpuMs": 10100,
+            "cpuShare": 0.9992472353982567,
+            "usPerReq": 134.1515248113909,
+            "bytesPerReq": 355.8484326851557,
+            "instrPerReq": 215943.35149027733,
+            "rss": 313
+          },
+          "express": {
+            "requests": 37131,
+            "rps": 3712.84,
+            "bad": 0,
+            "bytes": 13180600.32,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 13.22,
+              "p90": 14.04,
+              "p99": 27.54
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.998595374348407,
+            "usPerReq": 269.31674342193855,
+            "bytesPerReq": 354.9756354528561,
+            "instrPerReq": 355258.9084861706,
+            "rss": 305
+          }
+        },
+        {
+          "express": {
+            "requests": 38177,
+            "rps": 3780,
+            "bad": 0,
+            "bytes": 13547601.92,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 13.04,
+              "p90": 14.03,
+              "p99": 17.51
+            },
+            "cpuMs": 10100,
+            "cpuShare": 0.9987192636761266,
+            "usPerReq": 264.5571941221154,
+            "bytesPerReq": 354.8629258454043,
+            "instrPerReq": 350038.92540011,
+            "rss": 309
+          },
+          "fulmine-tuned": {
+            "requests": 74448,
+            "rps": 7370.98,
+            "bad": 0,
+            "bytes": 26508001.28,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 6.71,
+              "p90": 6.86,
+              "p99": 8.46
+            },
+            "cpuMs": 10110,
+            "cpuShare": 1.0001904451645334,
+            "usPerReq": 135.79948420373952,
+            "bytesPerReq": 356.06062325381475,
+            "instrPerReq": 215542.7897055663,
+            "rss": 313
+          }
+        }
+      ],
+      "fixed": [
+        {
+          "express": {
+            "requests": 18992,
+            "rps": 1897.88,
+            "bad": 0,
+            "bytes": 6742343.68,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.5630000000000001,
+              "p90": 1.11,
+              "p99": 1.84
+            },
+            "cpuMs": 5810,
+            "cpuShare": 0.580151309934163,
+            "usPerReq": 305.91828138163436,
+            "bytesPerReq": 355.00967144060655,
+            "instrPerReq": 351179.475673968,
+            "rss": 311
+          },
+          "fulmine-tuned": {
+            "requests": 19155,
+            "rps": 1914.36,
+            "bad": 0,
+            "bytes": 6815744,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.3,
+              "p90": 0.524,
+              "p99": 0.85
+            },
+            "cpuMs": 3520,
+            "cpuShare": 0.3515147957613587,
+            "usPerReq": 183.76403027930044,
+            "bytesPerReq": 355.820621247716,
+            "instrPerReq": 218743.4587836074,
+            "rss": 315
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 18823,
+            "rps": 1879.71,
+            "bad": 0,
+            "bytes": 6700400.64,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.31,
+              "p90": 0.5670000000000001,
+              "p99": 3.03
+            },
+            "cpuMs": 3860,
+            "cpuShare": 0.3851310098000904,
+            "usPerReq": 205.0682675450247,
+            "bytesPerReq": 355.9687956223769,
+            "instrPerReq": 255238.97311799394,
+            "rss": 161
+          },
+          "express": {
+            "requests": 18858,
+            "rps": 1883.94,
+            "bad": 0,
+            "bytes": 6689914.88,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.551,
+              "p90": 1.08,
+              "p99": 1.68
+            },
+            "cpuMs": 5650,
+            "cpuShare": 0.5640181327561106,
+            "usPerReq": 299.6075935942306,
+            "bytesPerReq": 354.7520882384134,
+            "instrPerReq": 350950.1604093753,
+            "rss": 312
+          }
+        },
+        {
+          "express": {
+            "requests": 18819,
+            "rps": 1880.22,
+            "bad": 0,
+            "bytes": 6679429.12,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.553,
+              "p90": 1.09,
+              "p99": 1.86
+            },
+            "cpuMs": 5680,
+            "cpuShare": 0.567040246674328,
+            "usPerReq": 301.8226260693979,
+            "bytesPerReq": 354.9300770497901,
+            "instrPerReq": 357947.55661831127,
+            "rss": 314
+          },
+          "fulmine-tuned": {
+            "requests": 19190,
+            "rps": 1917.37,
+            "bad": 0,
+            "bytes": 6826229.76,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.307,
+              "p90": 0.542,
+              "p99": 0.87
+            },
+            "cpuMs": 3710,
+            "cpuShare": 0.37040521915242874,
+            "usPerReq": 193.32985930171964,
+            "bytesPerReq": 355.7180698280354,
+            "instrPerReq": 225522.56315789474,
+            "rss": 161
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 19097,
+            "rps": 1908.2,
+            "bad": 0,
+            "bytes": 6794772.48,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.316,
+              "p90": 0.557,
+              "p99": 1.11
+            },
+            "cpuMs": 3750,
+            "cpuShare": 0.374400880379049,
+            "usPerReq": 196.36592134890296,
+            "bytesPerReq": 355.8031355710321,
+            "instrPerReq": 236944.69387861967,
+            "rss": 161
+          },
+          "express": {
+            "requests": 18662,
+            "rps": 1864.64,
+            "bad": 0,
+            "bytes": 6627000.32,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.585,
+              "p90": 1.36,
+              "p99": 12.74
+            },
+            "cpuMs": 6220,
+            "cpuShare": 0.6209797171599376,
+            "usPerReq": 333.2976101168149,
+            "bytesPerReq": 355.10665094845143,
+            "instrPerReq": 423381.9135676776,
+            "rss": 155
+          }
+        },
+        {
+          "express": {
+            "requests": 19154,
+            "rps": 1914.57,
+            "bad": 0,
+            "bytes": 6794772.48,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.559,
+              "p90": 1.12,
+              "p99": 1.9
+            },
+            "cpuMs": 5810,
+            "cpuShare": 0.5803067610168977,
+            "usPerReq": 303.3308969405868,
+            "bytesPerReq": 354.7443082384881,
+            "instrPerReq": 353657.14884619403,
+            "rss": 162
+          },
+          "fulmine-tuned": {
+            "requests": 18990,
+            "rps": 1896.69,
+            "bad": 0,
+            "bytes": 6763315.2,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.306,
+              "p90": 0.543,
+              "p99": 0.91
+            },
+            "cpuMs": 3670,
+            "cpuShare": 0.36627947980444886,
+            "usPerReq": 193.2596103212217,
+            "bytesPerReq": 356.1514060031596,
+            "instrPerReq": 225696.51463928382,
+            "rss": 163
+          }
+        }
+      ],
+      "rate": 1900,
+      "summary": {
+        "rps": {
+          "express": 3712.84,
+          "fulmine-tuned": 7454.75,
+          "ratio": 2.007829585977311
+        },
+        "usPerReq": {
+          "express": 269.31674342193855,
+          "fulmine-tuned": 134.1515248113909,
+          "ratio": 0.4981180267771756
+        },
+        "instrPerReq": {
+          "express": 355258.9084861706,
+          "fulmine-tuned": 215952.75689720456
+        },
+        "bytesPerReq": {
+          "express": 354.9555895508562,
+          "fulmine-tuned": 355.96464244212615
+        },
+        "fixed": {
+          "rate": 1900,
+          "cpuShare": {
+            "express": 0.580151309934163,
+            "fulmine-tuned": 0.37040521915242874,
+            "ratio": 0.6311825131290919
+          },
+          "usPerReq": {
+            "express": 303.3308969405868,
+            "fulmine-tuned": 193.32985930171964
+          },
+          "p50": {
+            "express": 0.559,
+            "fulmine-tuned": 0.307
+          },
+          "p99": {
+            "express": 1.86,
+            "fulmine-tuned": 0.91
+          }
+        },
+        "bad": 0
+      }
+    },
+    {
+      "name": "validate",
+      "what": "GET /account/validate, the session check on every client start",
+      "date": "2026-10-09T16:49:40.852Z",
+      "check": {
+        "seen": {
+          "express": {
+            "status": 200,
+            "bytes": 177,
+            "type": "application/json; charset=utf-8"
+          },
+          "fulmine-tuned": {
+            "status": 200,
+            "bytes": 177,
+            "type": "application/json; charset=utf-8"
+          }
+        },
+        "problems": []
+      },
+      "saturation": [
+        {
+          "express": {
+            "requests": 16561,
+            "rps": 1655.01,
+            "bad": 0,
+            "bytes": 8975810.56,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 28.61,
+              "p90": 35.07,
+              "p99": 208.57
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9984268235389872,
+            "usPerReq": 604.4320995108991,
+            "bytesPerReq": 541.984817341948,
+            "instrPerReq": 958276.8718676409,
+            "rss": 298
+          },
+          "fulmine-tuned": {
+            "requests": 20959,
+            "rps": 2094.71,
+            "bad": 0,
+            "bytes": 10894704.64,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 22.49,
+              "p90": 25.07,
+              "p99": 74.82
+            },
+            "cpuMs": 10020,
+            "cpuShare": 1.0003607410652342,
+            "usPerReq": 478.07624409561527,
+            "bytesPerReq": 519.81032682857,
+            "instrPerReq": 729953.4887637768,
+            "rss": 289
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 22064,
+            "rps": 2184.62,
+            "bad": 0,
+            "bytes": 11471421.44,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 22.21,
+              "p90": 22.61,
+              "p99": 38.62
+            },
+            "cpuMs": 10100,
+            "cpuShare": 0.999161027930509,
+            "usPerReq": 457.75924583031184,
+            "bytesPerReq": 519.9157650471356,
+            "instrPerReq": 688869.0658538797,
+            "rss": 291
+          },
+          "express": {
+            "requests": 17294,
+            "rps": 1728.54,
+            "bad": 0,
+            "bytes": 9374269.44,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 28.32,
+              "p90": 28.71,
+              "p99": 177.58
+            },
+            "cpuMs": 10020,
+            "cpuShare": 0.9997141428155397,
+            "usPerReq": 579.3916965421533,
+            "bytesPerReq": 542.0532809066729,
+            "instrPerReq": 896445.7859951428,
+            "rss": 299
+          }
+        },
+        {
+          "express": {
+            "requests": 17255,
+            "rps": 1724.46,
+            "bad": 0,
+            "bytes": 9353297.92,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 28.44,
+              "p90": 28.87,
+              "p99": 187.19
+            },
+            "cpuMs": 10020,
+            "cpuShare": 0.9995919470143351,
+            "usPerReq": 580.7012460156476,
+            "bytesPerReq": 542.0630495508548,
+            "instrPerReq": 894639.0691393799,
+            "rss": 300
+          },
+          "fulmine-tuned": {
+            "requests": 21990,
+            "rps": 2177.23,
+            "bad": 0,
+            "bytes": 11429478.4,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 22.33,
+              "p90": 22.67,
+              "p99": 38.73
+            },
+            "cpuMs": 10100,
+            "cpuShare": 0.9991116877210883,
+            "usPerReq": 459.29968167348795,
+            "bytesPerReq": 519.7579990904957,
+            "instrPerReq": 685390.723783538,
+            "rss": 293
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 22146,
+            "rps": 2192.69,
+            "bad": 0,
+            "bytes": 11513364.48,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 22.18,
+              "p90": 22.46,
+              "p99": 38.39
+            },
+            "cpuMs": 10100,
+            "cpuShare": 0.9991249281046641,
+            "usPerReq": 456.0643005508895,
+            "bytesPerReq": 519.8846057978868,
+            "instrPerReq": 684855.9884403504,
+            "rss": 293
+          },
+          "express": {
+            "requests": 17290,
+            "rps": 1728.27,
+            "bad": 0,
+            "bytes": 9374269.44,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 28.26,
+              "p90": 29,
+              "p99": 185.71
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.998752561542774,
+            "usPerReq": 578.9473684210526,
+            "bytesPerReq": 542.1786836321572,
+            "instrPerReq": 895806.2024869866,
+            "rss": 301
+          }
+        },
+        {
+          "express": {
+            "requests": 17279,
+            "rps": 1726.67,
+            "bad": 0,
+            "bytes": 9363783.68,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 28.36,
+              "p90": 28.99,
+              "p99": 202.86
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9984737331512474,
+            "usPerReq": 579.3159326349904,
+            "bytesPerReq": 541.9169905665836,
+            "instrPerReq": 894933.1776144453,
+            "rss": 302
+          },
+          "fulmine-tuned": {
+            "requests": 21909,
+            "rps": 2169.19,
+            "bad": 0,
+            "bytes": 11387535.36,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 22.12,
+              "p90": 22.43,
+              "p99": 41.83
+            },
+            "cpuMs": 9980,
+            "cpuShare": 0.98714562566751,
+            "usPerReq": 455.52056232598477,
+            "bytesPerReq": 519.765181432288,
+            "instrPerReq": 687598.1472454242,
+            "rss": 295
+          }
+        }
+      ],
+      "fixed": [
+        {
+          "express": {
+            "requests": 8394,
+            "rps": 838.77,
+            "bad": 0,
+            "bytes": 4550819.84,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.97,
+              "p90": 3.26,
+              "p99": 39.44
+            },
+            "cpuMs": 6310,
+            "cpuShare": 0.6299073281666493,
+            "usPerReq": 751.7274243507267,
+            "bytesPerReq": 542.1515177507744,
+            "instrPerReq": 1152399.3139147009,
+            "rss": 172
+          },
+          "fulmine-tuned": {
+            "requests": 8403,
+            "rps": 839.83,
+            "bad": 0,
+            "bytes": 4372561.92,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.636,
+              "p90": 1.56,
+              "p99": 8.34
+            },
+            "cpuMs": 4830,
+            "cpuShare": 0.4823177619597935,
+            "usPerReq": 574.7947161727955,
+            "bytesPerReq": 520.3572438414852,
+            "instrPerReq": 818059.1787456861,
+            "rss": 176
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 8527,
+            "rps": 852.24,
+            "bad": 0,
+            "bytes": 4435476.48,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.599,
+              "p90": 1.38,
+              "p99": 3.02
+            },
+            "cpuMs": 4510,
+            "cpuShare": 0.4504142499605213,
+            "usPerReq": 528.9081740354169,
+            "bytesPerReq": 520.1684625307846,
+            "instrPerReq": 727451.3215667879,
+            "rss": 178
+          },
+          "express": {
+            "requests": 8400,
+            "rps": 839.41,
+            "bad": 0,
+            "bytes": 4550819.84,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.767,
+              "p90": 2.13,
+              "p99": 8.12
+            },
+            "cpuMs": 5870,
+            "cpuShare": 0.5861162750978157,
+            "usPerReq": 698.8095238095239,
+            "bytesPerReq": 541.7642666666667,
+            "instrPerReq": 1046968.6877380953,
+            "rss": 174
+          }
+        },
+        {
+          "express": {
+            "requests": 8508,
+            "rps": 849.73,
+            "bad": 0,
+            "bytes": 4613734.4,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.712,
+              "p90": 1.95,
+              "p99": 4.35
+            },
+            "cpuMs": 5740,
+            "cpuShare": 0.5727967314051853,
+            "usPerReq": 674.6591443347438,
+            "bytesPerReq": 542.2818993888105,
+            "instrPerReq": 993957.6795956746,
+            "rss": 174
+          },
+          "fulmine-tuned": {
+            "requests": 8411,
+            "rps": 840.35,
+            "bad": 0,
+            "bytes": 4372561.92,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.601,
+              "p90": 1.34,
+              "p99": 2.24
+            },
+            "cpuMs": 4440,
+            "cpuShare": 0.4432632817094596,
+            "usPerReq": 527.8801569373439,
+            "bytesPerReq": 519.862313636904,
+            "instrPerReq": 701235.880632505,
+            "rss": 179
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 8565,
+            "rps": 855.96,
+            "bad": 0,
+            "bytes": 4456448,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.602,
+              "p90": 1.37,
+              "p99": 2.56
+            },
+            "cpuMs": 4490,
+            "cpuShare": 0.4483764510300032,
+            "usPerReq": 524.2265032107414,
+            "bytesPerReq": 520.3091652072387,
+            "instrPerReq": 696523.3415061296,
+            "rss": 180
+          },
+          "express": {
+            "requests": 8558,
+            "rps": 854.94,
+            "bad": 0,
+            "bytes": 4634705.92,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.711,
+              "p90": 1.82,
+              "p99": 3.21
+            },
+            "cpuMs": 5700,
+            "cpuShare": 0.568993767466973,
+            "usPerReq": 666.0434681000233,
+            "bytesPerReq": 541.5641411544754,
+            "instrPerReq": 967855.9635428839,
+            "rss": 174
+          }
+        },
+        {
+          "express": {
+            "requests": 8538,
+            "rps": 853.22,
+            "bad": 0,
+            "bytes": 4624220.16,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.678,
+              "p90": 1.82,
+              "p99": 3.88
+            },
+            "cpuMs": 5670,
+            "cpuShare": 0.5661354844502633,
+            "usPerReq": 664.0899508081518,
+            "bytesPerReq": 541.6046099789178,
+            "instrPerReq": 985185.2598969314,
+            "rss": 175
+          },
+          "fulmine-tuned": {
+            "requests": 8497,
+            "rps": 849.06,
+            "bad": 0,
+            "bytes": 4414504.96,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.605,
+              "p90": 1.38,
+              "p99": 2.22
+            },
+            "cpuMs": 4510,
+            "cpuShare": 0.45031313426914005,
+            "usPerReq": 530.7755678474756,
+            "bytesPerReq": 519.5368906672943,
+            "instrPerReq": 701353.2708014593,
+            "rss": 181
+          }
+        }
+      ],
+      "rate": 860,
+      "summary": {
+        "rps": {
+          "express": 1726.67,
+          "fulmine-tuned": 2177.23,
+          "ratio": 1.263852731206683
+        },
+        "usPerReq": {
+          "express": 579.3916965421533,
+          "fulmine-tuned": 457.75924583031184,
+          "ratio": 0.7900687023342727
+        },
+        "instrPerReq": {
+          "express": 895806.2024869866,
+          "fulmine-tuned": 687598.1472454242
+        },
+        "bytesPerReq": {
+          "express": 542.0532809066729,
+          "fulmine-tuned": 519.81032682857
+        },
+        "fixed": {
+          "rate": 860,
+          "cpuShare": {
+            "express": 0.5727967314051853,
+            "fulmine-tuned": 0.45031313426914005,
+            "ratio": 0.7738579105052605
+          },
+          "usPerReq": {
+            "express": 674.6591443347438,
+            "fulmine-tuned": 528.9081740354169
+          },
+          "p50": {
+            "express": 0.712,
+            "fulmine-tuned": 0.602
+          },
+          "p99": {
+            "express": 4.35,
+            "fulmine-tuned": 2.56
+          }
+        },
+        "bad": 0
+      }
+    },
+    {
+      "name": "list-files",
+      "what": "GET /sync/list-user-files, the budget picker",
+      "date": "2026-10-09T16:53:15.150Z",
+      "check": {
+        "seen": {
+          "express": {
+            "status": 200,
+            "bytes": 338,
+            "type": "application/json; charset=utf-8"
+          },
+          "fulmine-tuned": {
+            "status": 200,
+            "bytes": 338,
+            "type": "application/json; charset=utf-8"
+          }
+        },
+        "problems": []
+      },
+      "saturation": [
+        {
+          "express": {
+            "requests": 13458,
+            "rps": 1345.23,
+            "bad": 0,
+            "bytes": 9479127.04,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 34.28,
+              "p90": 48.3,
+              "p99": 326.45
+            },
+            "cpuMs": 10020,
+            "cpuShare": 0.9994366144883455,
+            "usPerReq": 744.5385644226483,
+            "bytesPerReq": 704.3488661019468,
+            "instrPerReq": 1341648.8276118294,
+            "rss": 265
+          },
+          "fulmine-tuned": {
+            "requests": 17026,
+            "rps": 1701.92,
+            "bad": 0,
+            "bytes": 11607736.32,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 27.55,
+              "p90": 30.72,
+              "p99": 65.99
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.9986368999778191,
+            "usPerReq": 587.3370139786209,
+            "bytesPerReq": 681.7653189239986,
+            "instrPerReq": 1010706.2668859392,
+            "rss": 275
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 17781,
+            "rps": 1777.46,
+            "bad": 0,
+            "bytes": 12121538.56,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 27.33,
+              "p90": 27.69,
+              "p99": 47.57
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.9987616244754352,
+            "usPerReq": 562.3980653506552,
+            "bytesPerReq": 681.7129835217368,
+            "instrPerReq": 960129.1373376076,
+            "rss": 276
+          },
+          "express": {
+            "requests": 14260,
+            "rps": 1424.48,
+            "bad": 0,
+            "bytes": 10034872.32,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 34.18,
+              "p90": 35.36,
+              "p99": 301.58
+            },
+            "cpuMs": 10030,
+            "cpuShare": 0.9998861462642504,
+            "usPerReq": 703.3660589060308,
+            "bytesPerReq": 703.7077363253857,
+            "instrPerReq": 1228701.9887798037,
+            "rss": 266
+          }
+        },
+        {
+          "express": {
+            "requests": 14260,
+            "rps": 1412.01,
+            "bad": 0,
+            "bytes": 10034872.32,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 34.51,
+              "p90": 35.66,
+              "p99": 290.49
+            },
+            "cpuMs": 10110,
+            "cpuShare": 0.9990488327812298,
+            "usPerReq": 708.976157082749,
+            "bytesPerReq": 703.7077363253857,
+            "instrPerReq": 1228988.5587657783,
+            "rss": 267
+          },
+          "fulmine-tuned": {
+            "requests": 17522,
+            "rps": 1751.33,
+            "bad": 0,
+            "bytes": 11953766.4,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 27.75,
+              "p90": 28.15,
+              "p99": 48.65
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9995971329966047,
+            "usPerReq": 571.2818171441617,
+            "bytesPerReq": 682.2147243465358,
+            "instrPerReq": 956470.9432142449,
+            "rss": 277
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 17675,
+            "rps": 1767.32,
+            "bad": 0,
+            "bytes": 12058624,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 27.31,
+              "p90": 27.69,
+              "p99": 48.79
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.9989548693408802,
+            "usPerReq": 565.7708628005657,
+            "bytesPerReq": 682.241810466761,
+            "instrPerReq": 972113.0001697312,
+            "rss": 276
+          },
+          "express": {
+            "requests": 14169,
+            "rps": 1416.07,
+            "bad": 0,
+            "bytes": 9971957.76,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 34.27,
+              "p90": 35.31,
+              "p99": 287.82
+            },
+            "cpuMs": 10020,
+            "cpuShare": 0.9994114226751794,
+            "usPerReq": 707.1776413296634,
+            "bytesPerReq": 703.7869828498835,
+            "instrPerReq": 1240910.416472581,
+            "rss": 266
+          }
+        },
+        {
+          "express": {
+            "requests": 14289,
+            "rps": 1428.35,
+            "bad": 0,
+            "bytes": 10055843.84,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 34.07,
+              "p90": 35.12,
+              "p99": 298.03
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9985819819621868,
+            "usPerReq": 700.5388760585065,
+            "bytesPerReq": 703.7472069424032,
+            "instrPerReq": 1226747.3586675064,
+            "rss": 268
+          },
+          "fulmine-tuned": {
+            "requests": 17935,
+            "rps": 1775.78,
+            "bad": 0,
+            "bytes": 12236881.92,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 27.33,
+              "p90": 27.72,
+              "p99": 47.68
+            },
+            "cpuMs": 10100,
+            "cpuShare": 0.9991342151833831,
+            "usPerReq": 563.144689155283,
+            "bytesPerReq": 682.2906005018122,
+            "instrPerReq": 959885.1299693336,
+            "rss": 278
+          }
+        }
+      ],
+      "fixed": [
+        {
+          "express": {
+            "requests": 7082,
+            "rps": 707.76,
+            "bad": 0,
+            "bytes": 4980736,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.726,
+              "p90": 2.01,
+              "p99": 7.93
+            },
+            "cpuMs": 5320,
+            "cpuShare": 0.5312432864909773,
+            "usPerReq": 751.20022592488,
+            "bytesPerReq": 703.2951143744705,
+            "instrPerReq": 1228748.8428410054,
+            "rss": 268
+          },
+          "fulmine-tuned": {
+            "requests": 7137,
+            "rps": 713.26,
+            "bad": 0,
+            "bytes": 4865392.64,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.6940000000000001,
+              "p90": 1.63,
+              "p99": 8.32
+            },
+            "cpuMs": 4450,
+            "cpuShare": 0.44437509325910207,
+            "usPerReq": 623.5112792489841,
+            "bytesPerReq": 681.7139750595488,
+            "instrPerReq": 963709.459576853,
+            "rss": 279
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 7050,
+            "rps": 704.34,
+            "bad": 0,
+            "bytes": 4812963.84,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.6940000000000001,
+              "p90": 1.64,
+              "p99": 13.34
+            },
+            "cpuMs": 4460,
+            "cpuShare": 0.4452244442623196,
+            "usPerReq": 632.6241134751773,
+            "bytesPerReq": 682.6899063829787,
+            "instrPerReq": 993598.9405673759,
+            "rss": 276
+          },
+          "express": {
+            "requests": 7192,
+            "rps": 718.25,
+            "bad": 0,
+            "bytes": 5064622.08,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.726,
+              "p90": 2.01,
+              "p99": 8.7
+            },
+            "cpuMs": 5380,
+            "cpuShare": 0.5368812922906556,
+            "usPerReq": 748.0533926585094,
+            "bytesPerReq": 704.2021802002225,
+            "instrPerReq": 1228052.5685483871,
+            "rss": 269
+          }
+        },
+        {
+          "express": {
+            "requests": 6884,
+            "rps": 687.97,
+            "bad": 0,
+            "bytes": 4844421.12,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.722,
+              "p90": 2.01,
+              "p99": 13.29
+            },
+            "cpuMs": 5220,
+            "cpuShare": 0.5212458803814883,
+            "usPerReq": 758.280069726903,
+            "bytesPerReq": 703.721836141778,
+            "instrPerReq": 1260164.4100813481,
+            "rss": 268
+          },
+          "fulmine-tuned": {
+            "requests": 7067,
+            "rps": 705.84,
+            "bad": 0,
+            "bytes": 4823449.6,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.6910000000000001,
+              "p90": 1.56,
+              "p99": 9.33
+            },
+            "cpuMs": 4400,
+            "cpuShare": 0.43912549659163,
+            "usPerReq": 622.6121409367482,
+            "bytesPerReq": 682.5314277628413,
+            "instrPerReq": 963905.1017404839,
+            "rss": 276
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 7071,
+            "rps": 706.64,
+            "bad": 0,
+            "bytes": 4823449.6,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.6920000000000001,
+              "p90": 1.58,
+              "p99": 5.7
+            },
+            "cpuMs": 4410,
+            "cpuShare": 0.44037359885333577,
+            "usPerReq": 623.6741620704286,
+            "bytesPerReq": 682.1453259793523,
+            "instrPerReq": 964490.6908499505,
+            "rss": 277
+          },
+          "express": {
+            "requests": 7042,
+            "rps": 703.46,
+            "bad": 0,
+            "bytes": 4959764.48,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.73,
+              "p90": 2.03,
+              "p99": 5.7
+            },
+            "cpuMs": 5270,
+            "cpuShare": 0.5260488618369166,
+            "usPerReq": 748.3669412098835,
+            "bytesPerReq": 704.31191138881,
+            "instrPerReq": 1229008.3259017325,
+            "rss": 268
+          }
+        },
+        {
+          "express": {
+            "requests": 6903,
+            "rps": 689.45,
+            "bad": 0,
+            "bytes": 4854906.88,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.724,
+              "p90": 2.02,
+              "p99": 9.12
+            },
+            "cpuMs": 5160,
+            "cpuShare": 0.5149627734653538,
+            "usPerReq": 747.5010864841373,
+            "bytesPerReq": 703.3039084456034,
+            "instrPerReq": 1229923.6659423439,
+            "rss": 268
+          },
+          "fulmine-tuned": {
+            "requests": 7040,
+            "rps": 703.67,
+            "bad": 0,
+            "bytes": 4802478.08,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.7010000000000001,
+              "p90": 1.48,
+              "p99": 6.03
+            },
+            "cpuMs": 4420,
+            "cpuShare": 0.4414492369840006,
+            "usPerReq": 627.8409090909091,
+            "bytesPerReq": 682.1701818181818,
+            "instrPerReq": 964241.7088068182,
+            "rss": 277
+          }
+        }
+      ],
+      "rate": 710,
+      "summary": {
+        "rps": {
+          "express": 1416.07,
+          "fulmine-tuned": 1767.32,
+          "ratio": 1.2477956868471303
+        },
+        "usPerReq": {
+          "express": 707.1776413296634,
+          "fulmine-tuned": 565.7708628005657,
+          "ratio": 0.800040654193734
+        },
+        "instrPerReq": {
+          "express": 1228988.5587657783,
+          "fulmine-tuned": 960129.1373376076
+        },
+        "bytesPerReq": {
+          "express": 703.7472069424032,
+          "fulmine-tuned": 682.2147243465358
+        },
+        "fixed": {
+          "rate": 710,
+          "cpuShare": {
+            "express": 0.5260488618369166,
+            "fulmine-tuned": 0.4414492369840006,
+            "ratio": 0.8371344010052407
+          },
+          "usPerReq": {
+            "express": 748.3669412098835,
+            "fulmine-tuned": 623.6741620704286
+          },
+          "p50": {
+            "express": 0.726,
+            "fulmine-tuned": 0.6940000000000001
+          },
+          "p99": {
+            "express": 8.7,
+            "fulmine-tuned": 8.32
+          }
+        },
+        "bad": 0
+      }
+    },
+    {
+      "name": "sync-idle",
+      "what": "POST /sync/sync with nothing new, what an open budget sends over and over",
+      "date": "2026-10-09T16:56:49.283Z",
+      "check": {
+        "seen": {
+          "express": {
+            "status": 200,
+            "bytes": 15361,
+            "type": "application/actual-sync"
+          },
+          "fulmine-tuned": {
+            "status": 200,
+            "bytes": 15352,
+            "type": "application/actual-sync"
+          }
+        },
+        "problems": []
+      },
+      "saturation": [
+        {
+          "express": {
+            "requests": 3895,
+            "rps": 389.1,
+            "bad": 0,
+            "bytes": 61352181.76,
+            "socketErrors": 12,
+            "latency": {
+              "p50": 120.52,
+              "p90": 177.87,
+              "p99": 1030
+            },
+            "cpuMs": 10040,
+            "cpuShare": 0.999518218579805,
+            "usPerReq": 2577.6636713735556,
+            "bytesPerReq": 15751.522916559692,
+            "instrPerReq": 10789070.199229782,
+            "rss": 280
+          },
+          "fulmine-tuned": {
+            "requests": 4399,
+            "rps": 439.58,
+            "bad": 0,
+            "bytes": 69153587.2,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 112.2,
+              "p90": 116.26,
+              "p99": 183.1
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9991306707764578,
+            "usPerReq": 2275.517162991589,
+            "bytesPerReq": 15720.297158445102,
+            "instrPerReq": 10021448.354398727,
+            "rss": 293
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 4450,
+            "rps": 444.74,
+            "bad": 0,
+            "bytes": 69960990.72,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 110.9,
+              "p90": 113.86,
+              "p99": 181.78
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.9982194216147057,
+            "usPerReq": 2247.191011235955,
+            "bytesPerReq": 15721.570948314606,
+            "instrPerReq": 10088421.45258427,
+            "rss": 297
+          },
+          "express": {
+            "requests": 3926,
+            "rps": 392.32,
+            "bad": 0,
+            "bytes": 61845012.48,
+            "socketErrors": 9,
+            "latency": {
+              "p50": 118.58,
+              "p90": 178.8,
+              "p99": 1070
+            },
+            "cpuMs": 10030,
+            "cpuShare": 0.9987746573445779,
+            "usPerReq": 2554.763117677025,
+            "bytesPerReq": 15752.677656647988,
+            "instrPerReq": 10767967.12888436,
+            "rss": 281
+          }
+        },
+        {
+          "express": {
+            "requests": 4139,
+            "rps": 413.38,
+            "bad": 0,
+            "bytes": 65200455.68,
+            "socketErrors": 9,
+            "latency": {
+              "p50": 116.14,
+              "p90": 125.48,
+              "p99": 956.74
+            },
+            "cpuMs": 10040,
+            "cpuShare": 0.9992864338430413,
+            "usPerReq": 2425.706692437787,
+            "bytesPerReq": 15752.707339937182,
+            "instrPerReq": 10525320.255375694,
+            "rss": 281
+          },
+          "fulmine-tuned": {
+            "requests": 4531,
+            "rps": 452.87,
+            "bad": 0,
+            "bytes": 71229767.68,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 109.42,
+              "p90": 111.21,
+              "p99": 176.12
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.9983882855169609,
+            "usPerReq": 2207.0183182520414,
+            "bytesPerReq": 15720.540207459724,
+            "instrPerReq": 9950155.470315604,
+            "rss": 297
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 4507,
+            "rps": 450.23,
+            "bad": 0,
+            "bytes": 70852280.32,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 109.65,
+              "p90": 111.94,
+              "p99": 178.53
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9987713463120641,
+            "usPerReq": 2220.9895717772356,
+            "bytesPerReq": 15720.497075660083,
+            "instrPerReq": 10042780.568670956,
+            "rss": 296
+          },
+          "express": {
+            "requests": 4268,
+            "rps": 426.26,
+            "bad": 0,
+            "bytes": 67234693.12,
+            "socketErrors": 7,
+            "latency": {
+              "p50": 115.65,
+              "p90": 118.63,
+              "p99": 1020
+            },
+            "cpuMs": 10030,
+            "cpuShare": 0.9981936965525362,
+            "usPerReq": 2350.0468603561385,
+            "bytesPerReq": 15753.208322399252,
+            "instrPerReq": 10205485.08411434,
+            "rss": 281
+          }
+        },
+        {
+          "express": {
+            "requests": 4270,
+            "rps": 426.8,
+            "bad": 0,
+            "bytes": 67266150.4,
+            "socketErrors": 7,
+            "latency": {
+              "p50": 115.42,
+              "p90": 120.31,
+              "p99": 1030
+            },
+            "cpuMs": 10030,
+            "cpuShare": 0.999078164124793,
+            "usPerReq": 2348.9461358313815,
+            "bytesPerReq": 15753.196814988292,
+            "instrPerReq": 10303460.302341921,
+            "rss": 282
+          },
+          "fulmine-tuned": {
+            "requests": 4557,
+            "rps": 455.5,
+            "bad": 0,
+            "bytes": 71638712.32,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 109.54,
+              "p90": 111.12,
+              "p99": 174.17
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9994565601228436,
+            "usPerReq": 2196.620583717358,
+            "bytesPerReq": 15720.586420890935,
+            "instrPerReq": 9902514.753346499,
+            "rss": 296
+          }
+        }
+      ],
+      "fixed": [
+        {
+          "express": {
+            "requests": 2080,
+            "rps": 207.82,
+            "bad": 0,
+            "bytes": 32768000,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 2.48,
+              "p90": 5.54,
+              "p99": 9.47
+            },
+            "cpuMs": 5000,
+            "cpuShare": 0.4991737335426748,
+            "usPerReq": 2403.846153846154,
+            "bytesPerReq": 15753.846153846154,
+            "instrPerReq": 10081123.314423077,
+            "rss": 282
+          },
+          "fulmine-tuned": {
+            "requests": 2078,
+            "rps": 207.6,
+            "bad": 0,
+            "bytes": 32663142.4,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 2.43,
+              "p90": 5.29,
+              "p99": 35.17
+            },
+            "cpuMs": 4790,
+            "cpuShare": 0.47810148532828534,
+            "usPerReq": 2305.1010587102983,
+            "bytesPerReq": 15718.547834456207,
+            "instrPerReq": 9957315.19441771,
+            "rss": 296
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 2035,
+            "rps": 203.3,
+            "bad": 0,
+            "bytes": 31992053.76,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 2.39,
+              "p90": 4.71,
+              "p99": 18.63
+            },
+            "cpuMs": 4670,
+            "cpuShare": 0.46615395202017,
+            "usPerReq": 2294.840294840295,
+            "bytesPerReq": 15720.91093857494,
+            "instrPerReq": 9946959.032432433,
+            "rss": 296
+          },
+          "express": {
+            "requests": 2072,
+            "rps": 206.93,
+            "bad": 0,
+            "bytes": 32642170.88,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 2.48,
+              "p90": 5.79,
+              "p99": 21
+            },
+            "cpuMs": 5030,
+            "cpuShare": 0.5019239244451101,
+            "usPerReq": 2427.6061776061774,
+            "bytesPerReq": 15753.943474903474,
+            "instrPerReq": 10172703.09942085,
+            "rss": 281
+          }
+        },
+        {
+          "express": {
+            "requests": 2106,
+            "rps": 210.45,
+            "bad": 0,
+            "bytes": 33176944.64,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 2.48,
+              "p90": 5.66,
+              "p99": 10.39
+            },
+            "cpuMs": 5090,
+            "cpuShare": 0.508206555958646,
+            "usPerReq": 2416.90408357075,
+            "bytesPerReq": 15753.534966761634,
+            "instrPerReq": 10182404.07217474,
+            "rss": 282
+          },
+          "fulmine-tuned": {
+            "requests": 2085,
+            "rps": 208.26,
+            "bad": 0,
+            "bytes": 32778485.76,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 2.47,
+              "p90": 5.38,
+              "p99": 10.89
+            },
+            "cpuMs": 4810,
+            "cpuShare": 0.4800461580289353,
+            "usPerReq": 2306.9544364508392,
+            "bytesPerReq": 15721.096287769786,
+            "instrPerReq": 9934846.847002398,
+            "rss": 296
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 2031,
+            "rps": 202.99,
+            "bad": 0,
+            "bytes": 31929139.2,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 2.41,
+              "p90": 4.7,
+              "p99": 7.59
+            },
+            "cpuMs": 4600,
+            "cpuShare": 0.459365564385084,
+            "usPerReq": 2264.8941408173314,
+            "bytesPerReq": 15720.895716395864,
+            "instrPerReq": 9849071.774002954,
+            "rss": 296
+          },
+          "express": {
+            "requests": 2042,
+            "rps": 204.04,
+            "bad": 0,
+            "bytes": 32170311.68,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 2.49,
+              "p90": 5.31,
+              "p99": 9.21
+            },
+            "cpuMs": 4950,
+            "cpuShare": 0.4942300811638017,
+            "usPerReq": 2424.09402546523,
+            "bytesPerReq": 15754.315220372184,
+            "instrPerReq": 10083524.582761997,
+            "rss": 282
+          }
+        },
+        {
+          "express": {
+            "requests": 1974,
+            "rps": 197.21,
+            "bad": 0,
+            "bytes": 31090278.4,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 2.63,
+              "p90": 5.73,
+              "p99": 14.55
+            },
+            "cpuMs": 4940,
+            "cpuShare": 0.493108461135039,
+            "usPerReq": 2502.532928064843,
+            "bytesPerReq": 15749.887740628166,
+            "instrPerReq": 10167788.08308004,
+            "rss": 281
+          },
+          "fulmine-tuned": {
+            "requests": 2113,
+            "rps": 211.19,
+            "bad": 0,
+            "bytes": 33218887.68,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 2.54,
+              "p90": 5.41,
+              "p99": 13.58
+            },
+            "cpuMs": 4870,
+            "cpuShare": 0.4863345793745545,
+            "usPerReq": 2304.7799337434926,
+            "bytesPerReq": 15721.196251774727,
+            "instrPerReq": 9929886.037860861,
+            "rss": 295
+          }
+        }
+      ],
+      "rate": 210,
+      "summary": {
+        "rps": {
+          "express": 413.38,
+          "fulmine-tuned": 450.23,
+          "ratio": 1.0955295369877596
+        },
+        "usPerReq": {
+          "express": 2425.706692437787,
+          "fulmine-tuned": 2220.9895717772356,
+          "ratio": 0.9098454999248207
+        },
+        "instrPerReq": {
+          "express": 10525320.255375694,
+          "fulmine-tuned": 10021448.354398727
+        },
+        "bytesPerReq": {
+          "express": 15752.707339937182,
+          "fulmine-tuned": 15720.540207459724
+        },
+        "fixed": {
+          "rate": 210,
+          "cpuShare": {
+            "express": 0.4991737335426748,
+            "fulmine-tuned": 0.47810148532828534,
+            "ratio": 0.9445886763963703
+          },
+          "usPerReq": {
+            "express": 2424.09402546523,
+            "fulmine-tuned": 2304.7799337434926
+          },
+          "p50": {
+            "express": 2.48,
+            "fulmine-tuned": 2.43
+          },
+          "p99": {
+            "express": 10.39,
+            "fulmine-tuned": 13.58
+          }
+        },
+        "bad": 44
+      }
+    },
+    {
+      "name": "sync-day",
+      "what": "POST /sync/sync from a day back, a client catching up",
+      "date": "2026-10-09T17:00:23.284Z",
+      "check": {
+        "seen": {
+          "express": {
+            "status": 200,
+            "bytes": 56783,
+            "type": "application/actual-sync"
+          },
+          "fulmine-tuned": {
+            "status": 200,
+            "bytes": 56776,
+            "type": "application/actual-sync"
+          }
+        },
+        "problems": []
+      },
+      "saturation": [
+        {
+          "express": {
+            "requests": 2134,
+            "rps": 213.28,
+            "bad": 0,
+            "bytes": 122012303.36,
+            "socketErrors": 19,
+            "latency": {
+              "p50": 219.45,
+              "p90": 241.29,
+              "p99": 970.01
+            },
+            "cpuMs": 9980,
+            "cpuShare": 0.9939640022112798,
+            "usPerReq": 4676.663542642924,
+            "bytesPerReq": 57175.399887535146,
+            "instrPerReq": 20961544.363636363,
+            "rss": 281
+          },
+          "fulmine-tuned": {
+            "requests": 2142,
+            "rps": 213.99,
+            "bad": 0,
+            "bytes": 122400276.48,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 228.34,
+              "p90": 240.81,
+              "p99": 310.35
+            },
+            "cpuMs": 9900,
+            "cpuShare": 0.9874911272114354,
+            "usPerReq": 4621.848739495798,
+            "bytesPerReq": 57142.9862184874,
+            "instrPerReq": 20751619.19887955,
+            "rss": 296
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 2166,
+            "rps": 216.45,
+            "bad": 0,
+            "bytes": 123773911.04,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 227.29,
+              "p90": 239.23,
+              "p99": 296.25
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9991824099594825,
+            "usPerReq": 4621.421975992613,
+            "bytesPerReq": 57144.003250230846,
+            "instrPerReq": 21159987.971837487,
+            "rss": 296
+          },
+          "express": {
+            "requests": 2137,
+            "rps": 213.5,
+            "bad": 0,
+            "bytes": 122180075.52,
+            "socketErrors": 19,
+            "latency": {
+              "p50": 217.87,
+              "p90": 243.87,
+              "p99": 966.94
+            },
+            "cpuMs": 9970,
+            "cpuShare": 0.992583974739507,
+            "usPerReq": 4665.418811417875,
+            "bytesPerReq": 57173.64320074871,
+            "instrPerReq": 20966053.595226955,
+            "rss": 281
+          }
+        },
+        {
+          "express": {
+            "requests": 2123,
+            "rps": 212.12,
+            "bad": 0,
+            "bytes": 121383157.76,
+            "socketErrors": 22,
+            "latency": {
+              "p50": 219.5,
+              "p90": 241.64,
+              "p99": 1000
+            },
+            "cpuMs": 10040,
+            "cpuShare": 0.9996185295393902,
+            "usPerReq": 4729.156853509186,
+            "bytesPerReq": 57175.29804992935,
+            "instrPerReq": 21408804.78897786,
+            "rss": 281
+          },
+          "fulmine-tuned": {
+            "requests": 2211,
+            "rps": 220.94,
+            "bad": 0,
+            "bytes": 126342922.24,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 222.56,
+              "p90": 236.26,
+              "p99": 288.44
+            },
+            "cpuMs": 9980,
+            "cpuShare": 0.9960731339746739,
+            "usPerReq": 4513.794663048395,
+            "bytesPerReq": 57142.88658525554,
+            "instrPerReq": 20724542.30936228,
+            "rss": 295
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 2215,
+            "rps": 221.32,
+            "bad": 0,
+            "bytes": 126573608.96,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 222.04,
+              "p90": 231.71,
+              "p99": 290.82
+            },
+            "cpuMs": 10020,
+            "cpuShare": 1.000079317568219,
+            "usPerReq": 4523.702031602709,
+            "bytesPerReq": 57143.84151693002,
+            "instrPerReq": 21147773.52595937,
+            "rss": 296
+          },
+          "express": {
+            "requests": 2142,
+            "rps": 213.97,
+            "bad": 0,
+            "bytes": 122463191.04,
+            "socketErrors": 20,
+            "latency": {
+              "p50": 217.4,
+              "p90": 237.51,
+              "p99": 883.04
+            },
+            "cpuMs": 9970,
+            "cpuShare": 0.9925815084272553,
+            "usPerReq": 4654.5284780578895,
+            "bytesPerReq": 57172.3580952381,
+            "instrPerReq": 20989816.332399625,
+            "rss": 281
+          }
+        },
+        {
+          "express": {
+            "requests": 2137,
+            "rps": 213.46,
+            "bad": 0,
+            "bytes": 122180075.52,
+            "socketErrors": 22,
+            "latency": {
+              "p50": 218.74,
+              "p90": 237.4,
+              "p99": 976.37
+            },
+            "cpuMs": 10040,
+            "cpuShare": 0.9994250115787956,
+            "usPerReq": 4698.175011698643,
+            "bytesPerReq": 57173.64320074871,
+            "instrPerReq": 21344261.921853065,
+            "rss": 281
+          },
+          "fulmine-tuned": {
+            "requests": 2191,
+            "rps": 218.98,
+            "bad": 0,
+            "bytes": 125199974.4,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 224.58,
+              "p90": 236.61,
+              "p99": 296.04
+            },
+            "cpuMs": 9900,
+            "cpuShare": 0.9879460248458692,
+            "usPerReq": 4518.484710178001,
+            "bytesPerReq": 57142.84545869466,
+            "instrPerReq": 20694401.161113646,
+            "rss": 295
+          }
+        }
+      ],
+      "fixed": [
+        {
+          "express": {
+            "requests": 1118,
+            "rps": 111.65,
+            "bad": 0,
+            "bytes": 63921192.96,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 4.89,
+              "p90": 12.25,
+              "p99": 22.22
+            },
+            "cpuMs": 5300,
+            "cpuShare": 0.5288764610868104,
+            "usPerReq": 4740.608228980322,
+            "bytesPerReq": 57174.59119856887,
+            "instrPerReq": 20768078.214669053,
+            "rss": 281
+          },
+          "fulmine-tuned": {
+            "requests": 1052,
+            "rps": 105.07,
+            "bad": 0,
+            "bytes": 60114862.08,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 4.49,
+              "p90": 11.35,
+              "p99": 25.61
+            },
+            "cpuMs": 4950,
+            "cpuShare": 0.493956471460647,
+            "usPerReq": 4705.32319391635,
+            "bytesPerReq": 57143.40501901141,
+            "instrPerReq": 20692611.33365019,
+            "rss": 295
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 1063,
+            "rps": 106.25,
+            "bad": 0,
+            "bytes": 60744007.68,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 4.5,
+              "p90": 11.1,
+              "p99": 24.23
+            },
+            "cpuMs": 5020,
+            "cpuShare": 0.501355990932869,
+            "usPerReq": 4722.483537158984,
+            "bytesPerReq": 57143.93949200376,
+            "instrPerReq": 20667689.287864536,
+            "rss": 296
+          },
+          "express": {
+            "requests": 1035,
+            "rps": 103.38,
+            "bad": 0,
+            "bytes": 59171143.68,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 4.76,
+              "p90": 11.57,
+              "p99": 20.82
+            },
+            "cpuMs": 5090,
+            "cpuShare": 0.5079983622048969,
+            "usPerReq": 4917.874396135266,
+            "bytesPerReq": 57170.18713043478,
+            "instrPerReq": 20900594.219323672,
+            "rss": 281
+          }
+        },
+        {
+          "express": {
+            "requests": 1075,
+            "rps": 107.42,
+            "bad": 0,
+            "bytes": 61457039.36,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 4.86,
+              "p90": 13.34,
+              "p99": 63.57
+            },
+            "cpuMs": 5330,
+            "cpuShare": 0.5321685347724544,
+            "usPerReq": 4958.139534883721,
+            "bytesPerReq": 57169.338939534886,
+            "instrPerReq": 20875551.918139536,
+            "rss": 281
+          },
+          "fulmine-tuned": {
+            "requests": 1114,
+            "rps": 111.29,
+            "bad": 0,
+            "bytes": 63659048.96,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 4.86,
+              "p90": 11.86,
+              "p99": 75.41
+            },
+            "cpuMs": 5360,
+            "cpuShare": 0.5350059734000913,
+            "usPerReq": 4811.490125673249,
+            "bytesPerReq": 57144.56818671454,
+            "instrPerReq": 20693548.82136445,
+            "rss": 295
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 1057,
+            "rps": 105.6,
+            "bad": 0,
+            "bytes": 60397977.6,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 4.58,
+              "p90": 11.02,
+              "p99": 22.92
+            },
+            "cpuMs": 5020,
+            "cpuShare": 0.5011184486113381,
+            "usPerReq": 4749.290444654683,
+            "bytesPerReq": 57140.94380321665,
+            "instrPerReq": 20651203.24408704,
+            "rss": 295
+          },
+          "express": {
+            "requests": 1071,
+            "rps": 107.01,
+            "bad": 0,
+            "bytes": 61236838.4,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 4.8,
+              "p90": 12.92,
+              "p99": 61.57
+            },
+            "cpuMs": 5180,
+            "cpuShare": 0.5171436026953544,
+            "usPerReq": 4836.601307189542,
+            "bytesPerReq": 57177.25340802988,
+            "instrPerReq": 20902618.970121384,
+            "rss": 281
+          }
+        },
+        {
+          "express": {
+            "requests": 1038,
+            "rps": 103.69,
+            "bad": 0,
+            "bytes": 59349401.6,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 4.7,
+              "p90": 10.56,
+              "p99": 22.18
+            },
+            "cpuMs": 5010,
+            "cpuShare": 0.5000600825682602,
+            "usPerReq": 4826.589595375723,
+            "bytesPerReq": 57176.68747591522,
+            "instrPerReq": 20895158.926782273,
+            "rss": 281
+          },
+          "fulmine-tuned": {
+            "requests": 1073,
+            "rps": 107.18,
+            "bad": 0,
+            "bytes": 61320724.48,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 4.65,
+              "p90": 11.39,
+              "p99": 20.57
+            },
+            "cpuMs": 5040,
+            "cpuShare": 0.5030565953794461,
+            "usPerReq": 4697.110904007456,
+            "bytesPerReq": 57148.85785647717,
+            "instrPerReq": 20694206.791239515,
+            "rss": 295
+          }
+        }
+      ],
+      "rate": 110,
+      "summary": {
+        "rps": {
+          "express": 213.46,
+          "fulmine-tuned": 218.98,
+          "ratio": 1.025859645835285
+        },
+        "usPerReq": {
+          "express": 4676.663542642924,
+          "fulmine-tuned": 4523.702031602709,
+          "ratio": 0.9718926531286864
+        },
+        "instrPerReq": {
+          "express": 20989816.332399625,
+          "fulmine-tuned": 20751619.19887955
+        },
+        "bytesPerReq": {
+          "express": 57173.64320074871,
+          "fulmine-tuned": 57142.9862184874
+        },
+        "fixed": {
+          "rate": 110,
+          "cpuShare": {
+            "express": 0.5171436026953544,
+            "fulmine-tuned": 0.501355990932869,
+            "ratio": 0.9869244238442076
+          },
+          "usPerReq": {
+            "express": 4836.601307189542,
+            "fulmine-tuned": 4722.483537158984
+          },
+          "p50": {
+            "express": 4.8,
+            "fulmine-tuned": 4.58
+          },
+          "p99": {
+            "express": 22.22,
+            "fulmine-tuned": 24.23
+          }
+        },
+        "bad": 102
+      }
+    },
+    {
+      "name": "index",
+      "what": "GET /, the web app's index.html",
+      "date": "2026-10-09T17:03:57.272Z",
+      "check": {
+        "seen": {
+          "express": {
+            "status": 200,
+            "bytes": 4256,
+            "type": "text/html; charset=utf-8"
+          },
+          "fulmine-tuned": {
+            "status": 200,
+            "bytes": 4256,
+            "type": "text/html; charset=utf-8"
+          }
+        },
+        "problems": []
+      },
+      "saturation": [
+        {
+          "express": {
+            "requests": 10770,
+            "rps": 1076.58,
+            "bad": 0,
+            "bytes": 53487861.76,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 45.15,
+              "p90": 51.74,
+              "p99": 89.95
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.9982910346621916,
+            "usPerReq": 928.5051067780872,
+            "bytesPerReq": 4966.375279480037,
+            "instrPerReq": 1002740.74726091,
+            "rss": 282
+          },
+          "fulmine-tuned": {
+            "requests": 61638,
+            "rps": 6159.11,
+            "bad": 0,
+            "bytes": 306152734.72,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 7.82,
+              "p90": 8.09,
+              "p99": 15.7
+            },
+            "cpuMs": 10020,
+            "cpuShare": 1.0003549780605154,
+            "usPerReq": 162.56205587462279,
+            "bytesPerReq": 4966.947900970181,
+            "instrPerReq": 337048.00629481813,
+            "rss": 303
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 61078,
+            "rps": 6104.15,
+            "bad": 0,
+            "bytes": 303374008.32,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 7.85,
+              "p90": 8.12,
+              "p99": 16.2
+            },
+            "cpuMs": 9990,
+            "cpuShare": 0.9974399549361869,
+            "usPerReq": 163.56134778479975,
+            "bytesPerReq": 4966.993161531157,
+            "instrPerReq": 339788.20663741446,
+            "rss": 304
+          },
+          "express": {
+            "requests": 11359,
+            "rps": 1134.92,
+            "bad": 0,
+            "bytes": 56413388.8,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 43.53,
+              "p90": 48.19,
+              "p99": 66.03
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.9979773609602223,
+            "usPerReq": 880.3591865481117,
+            "bytesPerReq": 4966.404507439035,
+            "instrPerReq": 879426.6591249229,
+            "rss": 282
+          }
+        },
+        {
+          "express": {
+            "requests": 11245,
+            "rps": 1124.03,
+            "bad": 0,
+            "bytes": 55847157.76,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 44.1,
+              "p90": 48.9,
+              "p99": 54.04
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9994214485020309,
+            "usPerReq": 890.1734104046243,
+            "bytesPerReq": 4966.399089373054,
+            "instrPerReq": 859439.2485549133,
+            "rss": 282
+          },
+          "fulmine-tuned": {
+            "requests": 60793,
+            "rps": 6075.1,
+            "bad": 0,
+            "bytes": 301947944.96,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 8,
+              "p90": 8.16,
+              "p99": 15.99
+            },
+            "cpuMs": 10020,
+            "cpuShare": 1.0004337639178675,
+            "usPerReq": 164.82160775089238,
+            "bytesPerReq": 4966.820932673169,
+            "instrPerReq": 333851.81359696016,
+            "rss": 307
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 61120,
+            "rps": 6109.1,
+            "bad": 0,
+            "bytes": 303573237.76,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 7.94,
+              "p90": 8.11,
+              "p99": 15.89
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.9986624490387254,
+            "usPerReq": 163.61256544502618,
+            "bytesPerReq": 4966.839623036649,
+            "instrPerReq": 333681.9169993455,
+            "rss": 311
+          },
+          "express": {
+            "requests": 11286,
+            "rps": 1127.99,
+            "bad": 0,
+            "bytes": 56046387.2,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 43.8,
+              "p90": 48.84,
+              "p99": 66.42
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.9983057090935912,
+            "usPerReq": 886.053517632465,
+            "bytesPerReq": 4966.009852915116,
+            "instrPerReq": 876536.7111465533,
+            "rss": 283
+          }
+        },
+        {
+          "express": {
+            "requests": 11477,
+            "rps": 1136.43,
+            "bad": 0,
+            "bytes": 56990105.6,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 43.22,
+              "p90": 48.27,
+              "p99": 69.81
+            },
+            "cpuMs": 10100,
+            "cpuShare": 0.9989988634767953,
+            "usPerReq": 880.0209113879934,
+            "bytesPerReq": 4965.5925416049495,
+            "instrPerReq": 877104.9455432604,
+            "rss": 283
+          },
+          "fulmine-tuned": {
+            "requests": 60986,
+            "rps": 6094.88,
+            "bad": 0,
+            "bytes": 302912634.88,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 7.87,
+              "p90": 8.09,
+              "p99": 17.67
+            },
+            "cpuMs": 10020,
+            "cpuShare": 1.000375592613659,
+            "usPerReq": 164.30000327944117,
+            "bytesPerReq": 4966.920848719378,
+            "instrPerReq": 339035.764536123,
+            "rss": 313
+          }
+        }
+      ],
+      "fixed": [
+        {
+          "express": {
+            "requests": 5440,
+            "rps": 543.56,
+            "bad": 0,
+            "bytes": 27011317.76,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 1.75,
+              "p90": 3.47,
+              "p99": 6
+            },
+            "cpuMs": 5880,
+            "cpuShare": 0.5870230046987756,
+            "usPerReq": 1080.8823529411766,
+            "bytesPerReq": 4965.315764705882,
+            "instrPerReq": 907588.03125,
+            "rss": 283
+          },
+          "fulmine-tuned": {
+            "requests": 5559,
+            "rps": 555.14,
+            "bad": 0,
+            "bytes": 27609006.08,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.368,
+              "p90": 0.539,
+              "p99": 0.745
+            },
+            "cpuMs": 1640,
+            "cpuShare": 0.1636519882863588,
+            "usPerReq": 295.01708940456916,
+            "bytesPerReq": 4966.541838460154,
+            "instrPerReq": 338934.35294117645,
+            "rss": 313
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 5582,
+            "rps": 557.76,
+            "bad": 0,
+            "bytes": 27724349.44,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.368,
+              "p90": 0.535,
+              "p99": 0.747
+            },
+            "cpuMs": 1660,
+            "cpuShare": 0.16574493636052412,
+            "usPerReq": 297.38445001791473,
+            "bytesPerReq": 4966.741211035472,
+            "instrPerReq": 340444.5664636331,
+            "rss": 314
+          },
+          "express": {
+            "requests": 5493,
+            "rps": 548.78,
+            "bad": 0,
+            "bytes": 27273461.76,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 1.78,
+              "p90": 3.75,
+              "p99": 5.96
+            },
+            "cpuMs": 6000,
+            "cpuShare": 0.5989646425367634,
+            "usPerReq": 1092.2992900054614,
+            "bytesPerReq": 4965.130486073184,
+            "instrPerReq": 868021.6404514837,
+            "rss": 283
+          }
+        },
+        {
+          "express": {
+            "requests": 5489,
+            "rps": 548.47,
+            "bad": 0,
+            "bytes": 27262976,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 1.7,
+              "p90": 3.5,
+              "p99": 6.36
+            },
+            "cpuMs": 5950,
+            "cpuShare": 0.5940031878064546,
+            "usPerReq": 1083.9861541264347,
+            "bytesPerReq": 4966.838404080889,
+            "instrPerReq": 903750.584623793,
+            "rss": 283
+          },
+          "fulmine-tuned": {
+            "requests": 5714,
+            "rps": 570.95,
+            "bad": 0,
+            "bytes": 28384952.32,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.373,
+              "p90": 0.56,
+              "p99": 0.796
+            },
+            "cpuMs": 1700,
+            "cpuShare": 0.16973311831527324,
+            "usPerReq": 297.5148757437872,
+            "bytesPerReq": 4967.615036751838,
+            "instrPerReq": 339634.1804340217,
+            "rss": 314
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 5613,
+            "rps": 560.87,
+            "bad": 0,
+            "bytes": 27881635.84,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.368,
+              "p90": 0.542,
+              "p99": 0.784
+            },
+            "cpuMs": 1670,
+            "cpuShare": 0.1667448449872365,
+            "usPerReq": 297.5236059148406,
+            "bytesPerReq": 4967.33223588099,
+            "instrPerReq": 339582.13914127916,
+            "rss": 315
+          },
+          "express": {
+            "requests": 5474,
+            "rps": 547.03,
+            "bad": 0,
+            "bytes": 27179089.92,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 1.76,
+              "p90": 3.59,
+              "p99": 5.94
+            },
+            "cpuMs": 5900,
+            "cpuShare": 0.5891434329334782,
+            "usPerReq": 1077.8224333211544,
+            "bytesPerReq": 4965.124208987943,
+            "instrPerReq": 870028.4271099744,
+            "rss": 283
+          }
+        },
+        {
+          "express": {
+            "requests": 5429,
+            "rps": 542.49,
+            "bad": 0,
+            "bytes": 26958888.96,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 1.71,
+              "p90": 3.47,
+              "p99": 5.63
+            },
+            "cpuMs": 5880,
+            "cpuShare": 0.5870506515085606,
+            "usPerReq": 1083.0723890219194,
+            "bytesPerReq": 4965.719093755756,
+            "instrPerReq": 900421.6093203168,
+            "rss": 282
+          },
+          "fulmine-tuned": {
+            "requests": 5673,
+            "rps": 566.69,
+            "bad": 0,
+            "bytes": 28175237.12,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.379,
+              "p90": 0.555,
+              "p99": 0.811
+            },
+            "cpuMs": 1720,
+            "cpuShare": 0.1716887812399405,
+            "usPerReq": 303.1905517362947,
+            "bytesPerReq": 4966.549818438216,
+            "instrPerReq": 340123.8202009519,
+            "rss": 316
+          }
+        }
+      ],
+      "rate": 560,
+      "summary": {
+        "rps": {
+          "express": 1127.99,
+          "fulmine-tuned": 6104.15,
+          "ratio": 5.404748983568055
+        },
+        "usPerReq": {
+          "express": 886.053517632465,
+          "fulmine-tuned": 163.61256544502618,
+          "ratio": 0.18515674117470377
+        },
+        "instrPerReq": {
+          "express": 877104.9455432604,
+          "fulmine-tuned": 337048.00629481813
+        },
+        "bytesPerReq": {
+          "express": 4966.375279480037,
+          "fulmine-tuned": 4966.920848719378
+        },
+        "fixed": {
+          "rate": 560,
+          "cpuShare": {
+            "express": 0.5891434329334782,
+            "fulmine-tuned": 0.1667448449872365,
+            "ratio": 0.28302928568171637
+          },
+          "usPerReq": {
+            "express": 1083.0723890219194,
+            "fulmine-tuned": 297.5148757437872
+          },
+          "p50": {
+            "express": 1.75,
+            "fulmine-tuned": 0.368
+          },
+          "p99": {
+            "express": 5.96,
+            "fulmine-tuned": 0.784
+          }
+        },
+        "bad": 0
+      }
+    },
+    {
+      "name": "bundle",
+      "what": "GET of the main bundle, 1.2 MB: a first visit, a new release, a browser without cache",
+      "date": "2026-10-09T17:07:31.267Z",
+      "check": {
+        "seen": {
+          "express": {
+            "status": 200,
+            "bytes": 1204128,
+            "type": "text/javascript; charset=utf-8"
+          },
+          "fulmine-tuned": {
+            "status": 200,
+            "bytes": 221000,
+            "type": "text/javascript; charset=utf-8",
+            "encoding": "br"
+          }
+        },
+        "problems": []
+      },
+      "saturation": [
+        {
+          "express": {
+            "requests": 1673,
+            "rps": 167.26,
+            "bad": 0,
+            "bytes": 2050846883.84,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 278.76,
+              "p90": 342.46,
+              "p99": 517.02
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.9981971728558304,
+            "usPerReq": 5977.286312014346,
+            "bytesPerReq": 1225849.9006814107,
+            "instrPerReq": 6241308.610878661,
+            "rss": 345
+          },
+          "fulmine-tuned": {
+            "requests": 45426,
+            "rps": 4539.07,
+            "bad": 0,
+            "bytes": 10071698309.12,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 10.58,
+              "p90": 10.85,
+              "p99": 21.57
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.9982186638211362,
+            "usPerReq": 220.13824681900235,
+            "bytesPerReq": 221716.6008259587,
+            "instrPerReq": 353214.80363668385,
+            "rss": 315
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 45276,
+            "rps": 4525.55,
+            "bad": 0,
+            "bytes": 10039486054.4,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 10.71,
+              "p90": 10.96,
+              "p99": 21.46
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9996300448096052,
+            "usPerReq": 221.08843537414967,
+            "bytesPerReq": 221739.686686103,
+            "instrPerReq": 347722.67159201344,
+            "rss": 318
+          },
+          "express": {
+            "requests": 1771,
+            "rps": 177.03,
+            "bad": 0,
+            "bytes": 2158221066.24,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 271.71,
+              "p90": 329.89,
+              "p99": 385.19
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.9981110746913301,
+            "usPerReq": 5646.527385657821,
+            "bytesPerReq": 1218645.435482778,
+            "instrPerReq": 5268567.637492942,
+            "rss": 336
+          }
+        },
+        {
+          "express": {
+            "requests": 1781,
+            "rps": 178.04,
+            "bad": 0,
+            "bytes": 2168958484.48,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 271.61,
+              "p90": 324.97,
+              "p99": 382.77
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9992538175436955,
+            "usPerReq": 5620.43795620438,
+            "bytesPerReq": 1217831.827332959,
+            "instrPerReq": 5493832.6558113415,
+            "rss": 342
+          },
+          "fulmine-tuned": {
+            "requests": 45080,
+            "rps": 4506.63,
+            "bad": 0,
+            "bytes": 9996536381.44,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 10.7,
+              "p90": 10.93,
+              "p99": 21.76
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.9987188104523652,
+            "usPerReq": 221.82786157941436,
+            "bytesPerReq": 221751.02886956523,
+            "instrPerReq": 351228.4767746229,
+            "rss": 318
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 45666,
+            "rps": 4521.33,
+            "bad": 0,
+            "bytes": 10125385400.32,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 10.64,
+              "p90": 10.87,
+              "p99": 21.68
+            },
+            "cpuMs": 10090,
+            "cpuShare": 0.9979790884884188,
+            "usPerReq": 220.95213068803923,
+            "bytesPerReq": 221727.0047807997,
+            "instrPerReq": 351348.7893180922,
+            "rss": 319
+          },
+          "express": {
+            "requests": 1824,
+            "rps": 182.34,
+            "bad": 0,
+            "bytes": 2222645575.68,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 267.76,
+              "p90": 313.49,
+              "p99": 368.11
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9992397288017234,
+            "usPerReq": 5487.938596491228,
+            "bytesPerReq": 1218555.6884210526,
+            "instrPerReq": 5050865.237390351,
+            "rss": 336
+          }
+        },
+        {
+          "express": {
+            "requests": 1860,
+            "rps": 185.94,
+            "bad": 0,
+            "bytes": 2265595248.64,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 261.92,
+              "p90": 307.62,
+              "p99": 354.23
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9992586376383154,
+            "usPerReq": 5381.720430107527,
+            "bytesPerReq": 1218061.9616344084,
+            "instrPerReq": 4810615.896236559,
+            "rss": 323
+          },
+          "fulmine-tuned": {
+            "requests": 45579,
+            "rps": 4555.59,
+            "bad": 0,
+            "bytes": 10103910563.84,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 10.66,
+              "p90": 10.89,
+              "p99": 21.36
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9996195912194642,
+            "usPerReq": 219.61868404309,
+            "bytesPerReq": 221679.07509686478,
+            "instrPerReq": 345860.32361394505,
+            "rss": 323
+          }
+        }
+      ],
+      "fixed": [
+        {
+          "express": {
+            "requests": 849,
+            "rps": 84.86,
+            "bad": 0,
+            "bytes": 1020054732.8,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 11.14,
+              "p90": 75.41,
+              "p99": 101.11
+            },
+            "cpuMs": 6080,
+            "cpuShare": 0.6071566847440415,
+            "usPerReq": 7161.366313309776,
+            "bytesPerReq": 1201477.894935218,
+            "instrPerReq": 8329186.856301531,
+            "rss": 306
+          },
+          "fulmine-tuned": {
+            "requests": 869,
+            "rps": 86.82,
+            "bad": 0,
+            "bytes": 192717783.04,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.486,
+              "p90": 0.633,
+              "p99": 0.85
+            },
+            "cpuMs": 390,
+            "cpuShare": 0.038936082177073554,
+            "usPerReq": 448.7917146144994,
+            "bytesPerReq": 221769.6007364787,
+            "instrPerReq": 350051.6985040276,
+            "rss": 323
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 850,
+            "rps": 84.94,
+            "bad": 0,
+            "bytes": 188502507.52,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.533,
+              "p90": 0.659,
+              "p99": 0.806
+            },
+            "cpuMs": 400,
+            "cpuShare": 0.03994125603422219,
+            "usPerReq": 470.5882352941176,
+            "bytesPerReq": 221767.65590588236,
+            "instrPerReq": 352415.9376470588,
+            "rss": 323
+          },
+          "express": {
+            "requests": 831,
+            "rps": 83.04,
+            "bad": 0,
+            "bytes": 998579896.32,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 10.59,
+              "p90": 66.82,
+              "p99": 86.48
+            },
+            "cpuMs": 6340,
+            "cpuShare": 0.6329512900977584,
+            "usPerReq": 7629.362214199759,
+            "bytesPerReq": 1201660.5250541517,
+            "instrPerReq": 9221102.12876053,
+            "rss": 283
+          }
+        },
+        {
+          "express": {
+            "requests": 793,
+            "rps": 79.26,
+            "bad": 0,
+            "bytes": 955630223.36,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 8.42,
+              "p90": 58.3,
+              "p99": 76.18
+            },
+            "cpuMs": 5490,
+            "cpuShare": 0.5482001087224068,
+            "usPerReq": 6923.076923076923,
+            "bytesPerReq": 1205082.2488776797,
+            "instrPerReq": 7193858,
+            "rss": 306
+          },
+          "fulmine-tuned": {
+            "requests": 875,
+            "rps": 87.4,
+            "bad": 0,
+            "bytes": 194049474.56,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.516,
+              "p90": 0.643,
+              "p99": 0.838
+            },
+            "cpuMs": 410,
+            "cpuShare": 0.040923106313975555,
+            "usPerReq": 468.57142857142856,
+            "bytesPerReq": 221770.82806857143,
+            "instrPerReq": 353042.208,
+            "rss": 323
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 958,
+            "rps": 95.74,
+            "bad": 0,
+            "bytes": 212451983.36,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.484,
+              "p90": 0.625,
+              "p99": 0.732
+            },
+            "cpuMs": 420,
+            "cpuShare": 0.04193950282497051,
+            "usPerReq": 438.4133611691023,
+            "bytesPerReq": 221766.16217119,
+            "instrPerReq": 350179.6544885177,
+            "rss": 323
+          },
+          "express": {
+            "requests": 822,
+            "rps": 82.14,
+            "bad": 0,
+            "bytes": 987842478.08,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 9.84,
+              "p90": 65.58,
+              "p99": 97.23
+            },
+            "cpuMs": 6260,
+            "cpuShare": 0.6250206700500902,
+            "usPerReq": 7615.571776155718,
+            "bytesPerReq": 1201754.839513382,
+            "instrPerReq": 9334038.626520682,
+            "rss": 288
+          }
+        },
+        {
+          "express": {
+            "requests": 857,
+            "rps": 85.6,
+            "bad": 0,
+            "bytes": 1030792151.04,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 10.06,
+              "p90": 67.34,
+              "p99": 88.69
+            },
+            "cpuMs": 6130,
+            "cpuShare": 0.6117666288619384,
+            "usPerReq": 7152.8588098016335,
+            "bytesPerReq": 1202791.3080980163,
+            "instrPerReq": 7877883.8494749125,
+            "rss": 285
+          },
+          "fulmine-tuned": {
+            "requests": 906,
+            "rps": 90.52,
+            "bad": 0,
+            "bytes": 200917647.36,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.525,
+              "p90": 0.652,
+              "p99": 0.8140000000000001
+            },
+            "cpuMs": 430,
+            "cpuShare": 0.042927031365736855,
+            "usPerReq": 474.61368653421636,
+            "bytesPerReq": 221763.40768211923,
+            "instrPerReq": 353519.74061810155,
+            "rss": 323
+          }
+        }
+      ],
+      "rate": 89,
+      "summary": {
+        "rps": {
+          "express": 178.04,
+          "fulmine-tuned": 4525.55,
+          "ratio": 25.312457874634916
+        },
+        "usPerReq": {
+          "express": 5620.43795620438,
+          "fulmine-tuned": 220.95213068803923,
+          "ratio": 0.03946807407322048
+        },
+        "instrPerReq": {
+          "express": 5268567.637492942,
+          "fulmine-tuned": 351228.4767746229
+        },
+        "bytesPerReq": {
+          "express": 1218555.6884210526,
+          "fulmine-tuned": 221727.0047807997
+        },
+        "fixed": {
+          "rate": 89,
+          "cpuShare": {
+            "express": 0.6117666288619384,
+            "fulmine-tuned": 0.040923106313975555,
+            "ratio": 0.06710098535078754
+          },
+          "usPerReq": {
+            "express": 7161.366313309776,
+            "fulmine-tuned": 468.57142857142856
+          },
+          "p50": {
+            "express": 10.06,
+            "fulmine-tuned": 0.516
+          },
+          "p99": {
+            "express": 88.69,
+            "fulmine-tuned": 0.8140000000000001
+          }
+        },
+        "bad": 0
+      }
+    },
+    {
+      "name": "bundle-304",
+      "what": "GET of the main bundle with If-None-Match, a returning browser",
+      "date": "2026-10-09T17:40:07.728Z",
+      "check": {
+        "seen": {
+          "express": {
+            "status": 304,
+            "bytes": 0
+          },
+          "fulmine-tuned": {
+            "status": 304,
+            "bytes": 0
+          }
+        },
+        "problems": []
+      },
+      "saturation": [
+        {
+          "express": {
+            "requests": 28476,
+            "rps": 2845.35,
+            "bad": 0,
+            "bytes": 18790481.92,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 17.47,
+              "p90": 18.34,
+              "p99": 27.94
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9989084910951234,
+            "usPerReq": 351.52409046214353,
+            "bytesPerReq": 659.8708357915439,
+            "instrPerReq": 453105.09976822586,
+            "rss": 302
+          },
+          "fulmine-tuned": {
+            "requests": 45216,
+            "rps": 4476.96,
+            "bad": 0,
+            "bytes": 30880563.2,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 10.92,
+              "p90": 11.14,
+              "p99": 21.63
+            },
+            "cpuMs": 10100,
+            "cpuShare": 0.9990207733889981,
+            "usPerReq": 223.3722576079264,
+            "bytesPerReq": 682.9565463552725,
+            "instrPerReq": 367056.58656227886,
+            "rss": 306
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 44816,
+            "rps": 4437.2,
+            "bad": 0,
+            "bytes": 30607933.44,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 11.01,
+              "p90": 11.22,
+              "p99": 21.94
+            },
+            "cpuMs": 10110,
+            "cpuShare": 0.9999208318862859,
+            "usPerReq": 225.5890753302392,
+            "bytesPerReq": 682.9688825419494,
+            "instrPerReq": 367555.8000714031,
+            "rss": 308
+          },
+          "express": {
+            "requests": 28317,
+            "rps": 2830.78,
+            "bad": 0,
+            "bytes": 18685624.32,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 17.47,
+              "p90": 18.45,
+              "p99": 38.86
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.9984016223013585,
+            "usPerReq": 353.14475403467884,
+            "bytesPerReq": 659.8730204470812,
+            "instrPerReq": 460945.775964968,
+            "rss": 300
+          }
+        },
+        {
+          "express": {
+            "requests": 28388,
+            "rps": 2836.91,
+            "bad": 0,
+            "bytes": 18738053.12,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 17.53,
+              "p90": 18.45,
+              "p99": 26.49
+            },
+            "cpuMs": 10020,
+            "cpuShare": 1.000121124749269,
+            "usPerReq": 352.96604198957306,
+            "bytesPerReq": 660.0695054248274,
+            "instrPerReq": 450489.4046428068,
+            "rss": 301
+          },
+          "fulmine-tuned": {
+            "requests": 44976,
+            "rps": 4453.37,
+            "bad": 0,
+            "bytes": 30712791.04,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 11.01,
+              "p90": 11.28,
+              "p99": 21.6
+            },
+            "cpuMs": 10100,
+            "cpuShare": 0.9991580890153284,
+            "usPerReq": 224.56421202419068,
+            "bytesPerReq": 682.8706652436855,
+            "instrPerReq": 362190.92280327284,
+            "rss": 312
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 43751,
+            "rps": 4374.54,
+            "bad": 0,
+            "bytes": 29873930.24,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 11.23,
+              "p90": 11.48,
+              "p99": 22.13
+            },
+            "cpuMs": 10000,
+            "cpuShare": 0.998856066881626,
+            "usPerReq": 228.56620420104684,
+            "bytesPerReq": 682.8170839523667,
+            "instrPerReq": 365248.8050101712,
+            "rss": 311
+          },
+          "express": {
+            "requests": 28577,
+            "rps": 2856.64,
+            "bad": 0,
+            "bytes": 18863882.24,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 17.27,
+              "p90": 18.38,
+              "p99": 39.55
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.9993550367256082,
+            "usPerReq": 350.2816950694615,
+            "bytesPerReq": 660.1071575042866,
+            "instrPerReq": 460528.19183259265,
+            "rss": 303
+          }
+        },
+        {
+          "express": {
+            "requests": 29061,
+            "rps": 2905.5,
+            "bad": 0,
+            "bytes": 19178455.04,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 17.14,
+              "p90": 18.05,
+              "p99": 26.68
+            },
+            "cpuMs": 10010,
+            "cpuShare": 0.999585256798579,
+            "usPerReq": 344.4478854822614,
+            "bytesPerReq": 659.9378906438182,
+            "instrPerReq": 447165.10997556866,
+            "rss": 303
+          },
+          "fulmine-tuned": {
+            "requests": 44519,
+            "rps": 4407.66,
+            "bad": 0,
+            "bytes": 30408704,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 11.07,
+              "p90": 11.42,
+              "p99": 22.24
+            },
+            "cpuMs": 10110,
+            "cpuShare": 0.9999513369873921,
+            "usPerReq": 227.0940497315753,
+            "bytesPerReq": 683.0500235854354,
+            "instrPerReq": 365613.6208809722,
+            "rss": 311
+          }
+        }
+      ],
+      "fixed": [
+        {
+          "express": {
+            "requests": 13845,
+            "rps": 1383.33,
+            "bad": 0,
+            "bytes": 9133096.96,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.91,
+              "p90": 1.62,
+              "p99": 2.52
+            },
+            "cpuMs": 6130,
+            "cpuShare": 0.6119894408691646,
+            "usPerReq": 442.7591188154568,
+            "bytesPerReq": 659.667530516432,
+            "instrPerReq": 451425.4521487902,
+            "rss": 304
+          },
+          "fulmine-tuned": {
+            "requests": 13997,
+            "rps": 1398.39,
+            "bad": 0,
+            "bytes": 9563013.12,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.392,
+              "p90": 0.777,
+              "p99": 1.22
+            },
+            "cpuMs": 3940,
+            "cpuShare": 0.3933152154369731,
+            "usPerReq": 281.4888904765307,
+            "bytesPerReq": 683.218769736372,
+            "instrPerReq": 362101.44023719366,
+            "rss": 312
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 14021,
+            "rps": 1388.35,
+            "bad": 0,
+            "bytes": 9573498.88,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.384,
+              "p90": 0.765,
+              "p99": 1.24
+            },
+            "cpuMs": 3890,
+            "cpuShare": 0.38487572073281956,
+            "usPerReq": 277.44098138506524,
+            "bytesPerReq": 682.7971528421654,
+            "instrPerReq": 361803.2011268811,
+            "rss": 312
+          },
+          "express": {
+            "requests": 13764,
+            "rps": 1375.31,
+            "bad": 0,
+            "bytes": 9080668.16,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.87,
+              "p90": 1.59,
+              "p99": 2.71
+            },
+            "cpuMs": 6020,
+            "cpuShare": 0.6009971610520395,
+            "usPerReq": 437.3728567276954,
+            "bytesPerReq": 659.7404940424295,
+            "instrPerReq": 469097.4768235978,
+            "rss": 301
+          }
+        },
+        {
+          "express": {
+            "requests": 13896,
+            "rps": 1388.88,
+            "bad": 0,
+            "bytes": 9175040,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.87,
+              "p90": 1.62,
+              "p99": 2.59
+            },
+            "cpuMs": 6030,
+            "cpuShare": 0.6021978596843046,
+            "usPerReq": 433.9378238341969,
+            "bytesPerReq": 660.2648244099021,
+            "instrPerReq": 451289.02748992515,
+            "rss": 301
+          },
+          "fulmine-tuned": {
+            "requests": 14177,
+            "rps": 1416.13,
+            "bad": 0,
+            "bytes": 9678356.48,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.391,
+              "p90": 0.767,
+              "p99": 1.18
+            },
+            "cpuMs": 3930,
+            "cpuShare": 0.3922447234104247,
+            "usPerReq": 277.20956478803697,
+            "bytesPerReq": 682.6801495379841,
+            "instrPerReq": 361767.80792833463,
+            "rss": 314
+          }
+        },
+        {
+          "fulmine-tuned": {
+            "requests": 14096,
+            "rps": 1408.62,
+            "bad": 0,
+            "bytes": 9625927.68,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.392,
+              "p90": 0.769,
+              "p99": 1.21
+            },
+            "cpuMs": 3900,
+            "cpuShare": 0.38941862801255345,
+            "usPerReq": 276.67423382519866,
+            "bytesPerReq": 682.8836322360953,
+            "instrPerReq": 361850.96169125993,
+            "rss": 314
+          },
+          "express": {
+            "requests": 13768,
+            "rps": 1375.71,
+            "bad": 0,
+            "bytes": 9091153.92,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.87,
+              "p90": 1.58,
+              "p99": 2.51
+            },
+            "cpuMs": 5970,
+            "cpuShare": 0.5960354666194028,
+            "usPerReq": 433.61417780360256,
+            "bytesPerReq": 660.3104241719931,
+            "instrPerReq": 453183.57582800696,
+            "rss": 302
+          }
+        },
+        {
+          "express": {
+            "requests": 13811,
+            "rps": 1379.75,
+            "bad": 0,
+            "bytes": 9112125.44,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.88,
+              "p90": 1.57,
+              "p99": 2.41
+            },
+            "cpuMs": 5970,
+            "cpuShare": 0.5959060126208777,
+            "usPerReq": 432.26413728187674,
+            "bytesPerReq": 659.7730388820505,
+            "instrPerReq": 451764.05292882485,
+            "rss": 303
+          },
+          "fulmine-tuned": {
+            "requests": 13902,
+            "rps": 1389.39,
+            "bad": 0,
+            "bytes": 9500098.56,
+            "socketErrors": 0,
+            "latency": {
+              "p50": 0.382,
+              "p90": 0.775,
+              "p99": 1.3
+            },
+            "cpuMs": 3940,
+            "cpuShare": 0.3934382700443538,
+            "usPerReq": 283.41245863904476,
+            "bytesPerReq": 683.3620025895555,
+            "instrPerReq": 377538.61746511294,
+            "rss": 309
+          }
+        }
+      ],
+      "rate": 1400,
+      "summary": {
+        "rps": {
+          "express": 2845.35,
+          "fulmine-tuned": 4437.2,
+          "ratio": 1.567483167183603
+        },
+        "usPerReq": {
+          "express": 351.52409046214353,
+          "fulmine-tuned": 225.5890753302392,
+          "ratio": 0.6388005846126383
+        },
+        "instrPerReq": {
+          "express": 453105.09976822586,
+          "fulmine-tuned": 365613.6208809722
+        },
+        "bytesPerReq": {
+          "express": 659.9378906438182,
+          "fulmine-tuned": 682.9565463552725
+        },
+        "fixed": {
+          "rate": 1400,
+          "cpuShare": {
+            "express": 0.6009971610520395,
+            "fulmine-tuned": 0.3922447234104247,
+            "ratio": 0.651355226695848
+          },
+          "usPerReq": {
+            "express": 433.9378238341969,
+            "fulmine-tuned": 277.44098138506524
+          },
+          "p50": {
+            "express": 0.87,
+            "fulmine-tuned": 0.391
+          },
+          "p99": {
+            "express": 2.52,
+            "fulmine-tuned": 1.22
+          }
+        },
+        "bad": 0
+      }
+    }
+  ],
+  "memory": {
+    "express": {
+      "idle": 297,
+      "afterLoad": 285
+    },
+    "fulmine-tuned": {
+      "idle": 304,
+      "afterLoad": 323
+    }
+  }
+}

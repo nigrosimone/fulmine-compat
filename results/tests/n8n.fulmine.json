@@ -1,0 +1,37 @@
+{
+  "arm": "fulmine",
+  "code": 1,
+  "ms": 1377484,
+  "summary": [
+    "Test Files  13 failed | 307 passed | 3 skipped (323)",
+    "Tests  10 failed | 6109 passed | 51 skipped (6170)",
+    "Tests 10 ⎯⎯⎯⎯⎯⎯⎯"
+  ],
+  "failures": [
+    "FAIL  src/modules/dynamic-credentials.ee/__tests__/dynamic-credentials-rate-limit.integration.test.ts [ src/modules/dynamic-credentials.ee/__tests__/dynamic-credentials-rate-limit.integration.test.ts ]",
+    "FAIL  src/modules/instance-ai/repositories/__tests__/instance-ai-checkpoint.repository.integration.test.ts > InstanceAiCheckpointRepository.claimSuspendedForResume",
+    "FAIL  test/integration/database/repositories/agent-channel-status.repository.test.ts > AgentChannelStatusRepository",
+    "FAIL  test/integration/database/repositories/agent-execution.repository.test.ts > AgentExecutionRepository",
+    "FAIL  test/integration/dynamic-credentials.ee/form-trigger-submit-gate.api.test.ts [ test/integration/dynamic-credentials.ee/form-trigger-submit-gate.api.test.ts ]",
+    "FAIL  test/integration/public-api/data-tables.test.ts > GET /data-tables > should list data tables",
+    "FAIL  test/integration/public-api/endpoints-with-scopes-enabled.test.ts > Public API endpoints with API key scopes > API key scope enforcement > discover > should return only endpoints matching API key scopes",
+    "FAIL  test/integration/public-api/endpoints-with-scopes-enabled.test.ts > Public API endpoints with API key scopes > API key scope enforcement > users > GET /user > should fail to return the user when API key doesn't have \"user:read\" scope",
+    "FAIL  test/integration/public-api/endpoints-with-scopes-enabled.test.ts > Public API endpoints with API key scopes > API key scope enforcement > users > GET /user > should return the user when API key has \"user:read\" scope",
+    "FAIL  test/integration/public-api/executions.test.ts > GET /executions/:id > owner should be able to get an execution owned by him",
+    "FAIL  test/integration/public-api/folders.test.ts > POST /projects/:projectId/folders > should return 403 when feature is not licensed",
+    "FAIL  test/integration/public-api/log-streaming.test.ts > Log streaming in Public API > authorization > 'GET event-types' returns 403 without a log streaming scope",
+    "FAIL  test/integration/public-api/security-policy.test.ts > Security policy in Public API > GET /settings/security-policy > returns the current policy when licensed",
+    "FAIL  test/integration/public-api/workflows.test.ts > GET /workflows > should return workflows ordered by id",
+    "FAIL  test/integration/security-audit/instance-risk-reporter.test.ts > should report webhook lacking authentication",
+    "× 'GET event-types' returns 403 without a log streaming scope",
+    "× owner should be able to get an execution owned by him",
+    "× returns the current policy when licensed",
+    "× should fail to return the user when API key doesn't have \"user:read\" scope",
+    "× should list data tables",
+    "× should report webhook lacking authentication",
+    "× should return 403 when feature is not licensed",
+    "× should return only endpoints matching API key scopes",
+    "× should return the user when API key has \"user:read\" scope",
+    "× should return workflows ordered by id"
+  ]
+}

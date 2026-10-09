@@ -1,0 +1,16 @@
+{
+  "arm": "express5",
+  "code": 1,
+  "ms": 345016,
+  "summary": [
+    "Test Suites: 5 failed, 2 skipped, 225 passed, 230 of 232 total",
+    "Tests:       28 failed, 19 skipped, 4818 passed, 4865 total"
+  ],
+  "failures": [
+    "FAIL server/routes/files/images.agents.test.js",
+    "FAIL server/routes/files/multer.spec.js",
+    "FAIL server/services/AuthService.spec.js",
+    "FAIL server/services/Config/loadAsyncEndpoints.spec.js",
+    "FAIL server/utils/__tests__/staticCache.spec.js"
+  ]
+}

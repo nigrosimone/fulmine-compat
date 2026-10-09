@@ -1,0 +1,39 @@
+diff --git a/bin/package-browser b/bin/package-browser
+index 65ed276..fa3886b 100755
+--- a/bin/package-browser
++++ b/bin/package-browser
+@@ -31,3 +31,6 @@ if [ "$SKIP_TRANSLATIONS" = false ]; then
+ fi
+ 
+ lage build:browser --to=@actual-app/web
++
++# brotli and gzip twins of the web app, served by express.static({ preCompressed: true })
++find packages/desktop-client/build -type f \( -name '*.js' -o -name '*.css' -o -name '*.html' -o -name '*.svg' \) -size +1k -exec gzip -k9f {} \; -exec brotli -kfq 11 {} \;
+diff --git a/packages/sync-server/src/app.ts b/packages/sync-server/src/app.ts
+index 276059e..00dec03 100644
+--- a/packages/sync-server/src/app.ts
++++ b/packages/sync-server/src/app.ts
+@@ -171,7 +171,9 @@ if (isDev) {
+ } else {
+   console.log('Running in production mode - Serving static React app');
+ 
+-  app.use(express.static(config.get('webRoot'), { index: false }));
++  app.use(
++    express.static(config.get('webRoot'), { index: false, preCompressed: true }),
++  );
+   app.get('/{*splat}', (req, res) =>
+     res.sendFile('index.html', { root: config.get('webRoot') }),
+   );
+diff --git a/sync-server.Dockerfile b/sync-server.Dockerfile
+index 3b16506..c2fe389 100644
+--- a/sync-server.Dockerfile
++++ b/sync-server.Dockerfile
+@@ -1,7 +1,7 @@
+ FROM node:24-bookworm AS deps
+ 
+ # Install required packages
+-RUN apt-get update && apt-get install -y openssl
++RUN apt-get update && apt-get install -y openssl brotli
+ 
+ WORKDIR /app
+ 

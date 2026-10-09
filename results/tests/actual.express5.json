@@ -1,0 +1,10 @@
+{
+  "arm": "express5",
+  "code": 0,
+  "ms": 61191,
+  "summary": [
+    "Test Files  47 passed (47)",
+    "Tests  595 passed (595)"
+  ],
+  "failures": []
+}

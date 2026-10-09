@@ -1,0 +1,10 @@
+{
+  "arm": "fulmine",
+  "code": 0,
+  "ms": 64053,
+  "summary": [
+    "Test Files  47 passed (47)",
+    "Tests  595 passed (595)"
+  ],
+  "failures": []
+}
