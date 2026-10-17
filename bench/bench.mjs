@@ -20,6 +20,9 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = process.env.COMPAT_ROOT || path.resolve(HERE, "..");
 const HOOK = path.join(HERE, "fulmine-arm.mjs");
+const STEADY = path.join(HERE, "steady.cjs");
+// every arm: an arm left idle while the other is loaded must not get its heap shrunk, see steady.cjs
+const NODE_FLAGS = ["--no-memory-reducer", "--require", STEADY];
 const RESULTS = path.join(ROOT, "results", "bench");
 const WORK = process.env.BENCH_WORK || path.join(os.homedir(), "bench-work");
 
@@ -197,7 +200,7 @@ async function startArm(project, arm) {
         const map = Object.fromEntries(Object.entries(project.tuned.map).map(([k, file]) => [k, path.join(HERE, "tuned", file)]));
         env.FULMINE_ARM_MAP = JSON.stringify(map);
     }
-    const args = ["-c", opts.serverCpu, process.execPath, ...(arm.fulmine ? ["--import", HOOK] : []), ...project.command];
+    const args = ["-c", opts.serverCpu, process.execPath, ...NODE_FLAGS, ...(arm.fulmine ? ["--import", HOOK] : []), ...project.command];
     arm.logFile = path.join(WORK, `${project.name}-${arm.name}.log`);
     const fd = fs.openSync(arm.logFile, "w");
     arm.child = spawn("taskset", args, { cwd: path.join(ROOT, project.dir, project.cwd || ""), env, stdio: ["ignore", fd, fd] });
@@ -288,6 +291,9 @@ async function main() {
             arm.idleRss = rssMb(arm.child.pid);
             log(`${arm.name} seeded, ${arm.idleRss} MB`);
         }
+        // one full GC in both, so neither starts the rounds halfway through a marking left by boot
+        for (const arm of arms) process.kill(arm.child.pid, "SIGUSR2");
+        await sleep(3000);
 
         // the scenario list comes from each arm's own seed: tokens and ids differ between the two
         const names = project.scenarios(arms[0].ctx).map((s) => s.name);
@@ -306,6 +312,7 @@ async function main() {
             node: process.version,
             fulmine: JSON.parse(fs.readFileSync(path.join(ROOT, "arms/fulmine/node_modules/fulmine.js/package.json"), "utf8")).version,
             express: createRequire(path.join(ROOT, project.dir, project.cwd || "", "x.js"))("express/package.json").version,
+            nodeFlags: NODE_FLAGS.filter((f) => f.startsWith("--no-")),
             opts
         };
         const results = { project: project.name, title: project.title, env, arms: arms.map((a) => a.name), scenarios: [] };
