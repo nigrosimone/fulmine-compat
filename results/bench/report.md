@@ -47,18 +47,18 @@ Resident memory, idle after seeding and after the run: Express 297 and 409 MB, f
 
 ### LibreChat, API server
 
-Neoverse-N1, one core for the server. Node v24.18.1, Express 5.3.0, fulmine 5.25.1. Medians of 5 alternating rounds of 10 s, 50 keep-alive connections, no pipelining.
+Neoverse-N1, one core for the server. Node v24.18.1, Express 5.3.0, fulmine 5.25.2. Medians of 5 alternating rounds of 10 s, 50 keep-alive connections, no pipelining.
 
 | endpoint | Express req/s | fulmine req/s | | Express CPU/req | fulmine CPU/req | CPU change | fixed rate | Express CPU | fulmine CPU | Express p99 | fulmine p99 | Express out | fulmine out |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `health` | 6,908 | 24,553 | 3.58x | 144 us | 41 us | -72% | 3,500/s | 59% | 25% | 1.4 ms | 0.4 ms | 571 B | 572 B |
-| `index` | 694 | 743 | 1.07x | 1,438 us | 1,343 us | -7% | 350/s | 61% | 60% | 125.8 ms | 109.6 ms | 3.5 KB | 3.5 KB |
-| `bundle` | 485 | 526 | 1.08x | 2,056 us | 1,896 us | -7% | 240/s | 55% | 47% | 134.9 ms | 105.8 ms | 235.6 KB | 235.1 KB |
-| `config` | 275 | 289 | 1.02x | 3,605 us | 3,451 us | -4% | 140/s | 52% | 52% | 25.1 ms | 184.4 ms | 1.3 KB | 1.3 KB |
-| `user` | 531 | 586 | 1.12x | 1,879 us | 1,704 us | -11% | 270/s | 52% | 49% | 9.5 ms | 8.1 ms | 1.1 KB | 1.1 KB |
-| `endpoints` | 484 | 538 | 1.12x | 2,065 us | 1,856 us | -11% | 240/s | 50% | 48% | 9.6 ms | 9.0 ms | 903 B | 905 B |
-| `convos` | 263 | 266 | 1.00x | 3,797 us | 3,693 us | -2% | 130/s | 54% | 51% | 234.5 ms | 199.1 ms | 2.1 KB | 2.1 KB |
-| `messages` | 250 | 260 | 1.04x | 3,991 us | 3,849 us | -4% | 130/s | 55% | 56% | 225.0 ms | 259.2 ms | 4.9 KB | 4.9 KB |
+| `health` | 7,084 | 24,289 | 3.44x | 141 us | 41 us | -71% | 3,500/s | 60% | 26% | 1.4 ms | 0.4 ms | 571 B | 572 B |
+| `index` | 683 | 696 | 1.03x | 1,460 us | 1,434 us | -2% | 340/s | 59% | 61% | 123.0 ms | 111.9 ms | 3.5 KB | 3.5 KB |
+| `bundle` | 497 | 530 | 1.07x | 2,003 us | 1,885 us | -7% | 250/s | 43% | 62% | 115.4 ms | 108.6 ms | 234.1 KB | 234.8 KB |
+| `config` | 279 | 287 | 1.02x | 3,580 us | 3,453 us | -2% | 140/s | 51% | 51% | 230.5 ms | 154.7 ms | 1.3 KB | 1.3 KB |
+| `user` | 532 | 568 | 1.07x | 1,878 us | 1,755 us | -7% | 270/s | 53% | 50% | 9.2 ms | 8.7 ms | 1.1 KB | 1.1 KB |
+| `endpoints` | 495 | 519 | 1.06x | 2,020 us | 1,925 us | -6% | 250/s | 53% | 50% | 10.5 ms | 9.9 ms | 903 B | 905 B |
+| `convos` | 260 | 264 | 1.01x | 3,845 us | 3,773 us | -1% | 130/s | 52% | 53% | 228.5 ms | 242.1 ms | 2.1 KB | 2.1 KB |
+| `messages` | 254 | 258 | 1.03x | 3,924 us | 3,865 us | -2% | 130/s | 54% | 53% | 259.4 ms | 251.1 ms | 4.9 KB | 4.9 KB |
 
 | endpoint | what it is |
 | --- | --- |
@@ -71,24 +71,24 @@ Neoverse-N1, one core for the server. Node v24.18.1, Express 5.3.0, fulmine 5.25
 | `convos` | GET /api/convos, the sidebar: 25 conversations of 200 |
 | `messages` | GET /api/messages/:id, opening a conversation of 20 messages |
 
-Resident memory, idle after seeding and after the run: Express 425 and 649 MB, fulmine 484 and 772 MB.
+Resident memory, idle after seeding and after the run: Express 425 and 702 MB, fulmine 485 and 749 MB.
 
 Noise floor, Express against a second Express in the same conditions: req/s ratio health 1.018, config 1.001, convos 1.003; CPU per request ratio health 0.983, config 1.003, convos 0.997.
 
 ### LibreChat, API server, with patches/librechat.diff
 
-Neoverse-N1, one core for the server. Node v24.18.1, Express 5.3.0, fulmine 5.25.1. Medians of 5 alternating rounds of 10 s, 50 keep-alive connections, no pipelining.
+Neoverse-N1, one core for the server. Node v24.18.1, Express 5.3.0, fulmine 5.25.2. Medians of 5 alternating rounds of 10 s, 50 keep-alive connections, no pipelining.
 
 | endpoint | Express req/s | fulmine req/s | | Express CPU/req | fulmine CPU/req | CPU change | fixed rate | Express CPU | fulmine CPU | Express p99 | fulmine p99 | Express out | fulmine out |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `health` | 6,777 | 24,179 | 3.59x | 147 us | 41 us | -72% | 3,400/s | 59% | 25% | 1.4 ms | 0.4 ms | 571 B | 572 B |
-| `index` | 686 | 1,178 | 1.72x | 1,451 us | 846 us | -41% | 340/s | 60% | 35% | 127.5 ms | 51.1 ms | 3.5 KB | 3.5 KB |
-| `bundle` | 488 | 5,118 | 10.43x | 2,046 us | 195 us | -90% | 240/s | 44% | 9% | 110.0 ms | 0.8 ms | 234.8 KB | 182.3 KB |
-| `config` | 276 | 349 | 1.25x | 3,623 us | 2,860 us | -20% | 140/s | 52% | 41% | 193.8 ms | 11.9 ms | 1.3 KB | 1.3 KB |
-| `user` | 533 | 692 | 1.33x | 1,873 us | 1,442 us | -25% | 270/s | 52% | 40% | 9.0 ms | 6.0 ms | 1.1 KB | 1.1 KB |
-| `endpoints` | 484 | 617 | 1.28x | 2,060 us | 1,620 us | -22% | 240/s | 51% | 41% | 9.6 ms | 7.3 ms | 904 B | 905 B |
-| `convos` | 261 | 316 | 1.20x | 3,830 us | 3,126 us | -18% | 130/s | 52% | 42% | 242.7 ms | 148.2 ms | 2.1 KB | 2.1 KB |
-| `messages` | 254 | 309 | 1.22x | 3,932 us | 3,230 us | -18% | 130/s | 53% | 42% | 229.5 ms | 167.6 ms | 4.9 KB | 4.9 KB |
+| `health` | 6,820 | 23,639 | 3.47x | 146 us | 42 us | -71% | 3,400/s | 61% | 25% | 1.4 ms | 0.4 ms | 571 B | 572 B |
+| `index` | 660 | 1,552 | 2.33x | 1,484 us | 643 us | -57% | 330/s | 59% | 29% | 125.7 ms | 45.2 ms | 3.5 KB | 3.5 KB |
+| `bundle` | 482 | 5,234 | 10.86x | 2,071 us | 190 us | -91% | 240/s | 43% | 9% | 107.0 ms | 0.8 ms | 235.0 KB | 182.4 KB |
+| `config` | 275 | 347 | 1.24x | 3,632 us | 2,864 us | -19% | 140/s | 52% | 40% | 21.9 ms | 13.0 ms | 1.3 KB | 1.3 KB |
+| `user` | 517 | 685 | 1.35x | 1,931 us | 1,455 us | -26% | 260/s | 50% | 39% | 9.0 ms | 5.9 ms | 1.1 KB | 1.1 KB |
+| `endpoints` | 482 | 609 | 1.28x | 2,073 us | 1,638 us | -22% | 240/s | 52% | 42% | 11.5 ms | 7.9 ms | 904 B | 905 B |
+| `convos` | 256 | 314 | 1.23x | 3,904 us | 3,142 us | -19% | 130/s | 54% | 44% | 241.6 ms | 226.3 ms | 2.1 KB | 2.1 KB |
+| `messages` | 248 | 309 | 1.25x | 4,035 us | 3,236 us | -20% | 120/s | 52% | 41% | 262.1 ms | 160.3 ms | 4.9 KB | 4.8 KB |
 
-Resident memory, idle after seeding and after the run: Express 424 and 689 MB, fulmine 474 and 665 MB.
+Resident memory, idle after seeding and after the run: Express 425 and 686 MB, fulmine 481 and 659 MB.
 
