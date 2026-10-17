@@ -8,7 +8,7 @@
 set -e
 ROOT=$(pwd)
 NODE_VERSION=24.18.1
-FULMINE_VERSION=5.22.0
+FULMINE_VERSION=5.25.0
 ARCH=$(uname -m | sed 's/aarch64/arm64/;s/x86_64/x64/')
 
 if [ ! -x node24/bin/node ]; then
@@ -32,6 +32,8 @@ case "$1" in
     fetch actual
     cd actual
     node .yarn/releases/yarn-4.17.1.cjs install
+    # the newest Express in the range the project asks for, 5.3.0 in the results: only the lockfile changes
+    node .yarn/releases/yarn-4.17.1.cjs up "express@^5.2.1"
     # the web app and the server, as sync-server.Dockerfile does
     NODE_OPTIONS=--max_old_space_size=8192 node .yarn/releases/yarn-4.17.1.cjs build:server
     ;;
@@ -39,6 +41,8 @@ case "$1" in
     fetch librechat
     cd librechat
     npm ci --no-audit --no-fund
+    # the newest Express in the range the project asks for, 5.3.0 in the results: only the lockfile changes
+    npm update express --no-audit --no-fund
     NODE_OPTIONS=--max_old_space_size=8192 npm run frontend
     cd "$ROOT"
     # the MongoDB its docker-compose.yml runs
