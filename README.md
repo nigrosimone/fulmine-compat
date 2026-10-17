@@ -15,7 +15,7 @@ application with a database, twenty middlewares and a session check on every req
 
 ## Results
 
-The tests on fulmine 5.22.0, the endpoints on fulmine 5.25.0 against Express 5.3.0, October 2026.
+The tests on fulmine 5.22.0, the endpoints on fulmine 5.25.1 against Express 5.3.0, October 2026.
 
 ### Their tests
 
@@ -46,31 +46,32 @@ commit their submodule points to.
 
 ### Their endpoints
 
-Measured on one ARM core (Oracle Cloud A1, Neoverse N1), Node 24, fulmine 5.25.0 against Express
+Measured on one ARM core (Oracle Cloud A1, Neoverse N1), Node 24, fulmine 5.25.1 against Express
 5.3.0, how in Part 2. Express 5.3.0 is the newest in the range both projects ask for, and
 `bench/setup.sh` puts it in their lockfile. CPU per request, summed over a day of use of one active
 user, the mix in [`bench/cost.mjs`](bench/cost.mjs):
 
 | | Actual Budget | LibreChat |
 | --- | ---: | ---: |
-| Express | 96.9 ms | 89.4 ms |
-| fulmine, no change | 83.7 ms, **-14%** | 86.7 ms, **-3%** |
-| fulmine and the patch | 82.5 ms, **-15%** | 67.3 ms, **-25%** |
+| Express | 94.9 ms | 87.3 ms |
+| fulmine, no change | 79.3 ms, **-16%** | 85.0 ms, **-3%** |
+| fulmine and the patch | 79.3 ms, **-16%** | 65.6 ms, **-25%** |
 | the patch | [1 line, and 2 at build](patches/actual.diff) | [5 lines](patches/librechat.diff) |
 
 On October 9, with fulmine 5.22.0 against Express 5.2.1 and before the GC settings of Part 2, it was
--11% and -12% on Actual, -9% and -28% on LibreChat. Since then fulmine is faster on static files,
-Express 5.3 is faster on LibreChat, and LibreChat's figures no longer depend on the GC state each
-server happened to be in.
+-11% and -12% on Actual, -9% and -28% on LibreChat. Since then fulmine is faster on static files
+and, from 5.25.1, on `req.ip` behind a list of trusted proxies, which Actual's rate limiter reads
+twice a request; Express 5.3 is faster on LibreChat, and LibreChat's figures no longer depend on the
+GC state each server happened to be in.
 
 Endpoint by endpoint, CPU per request against Express:
 
-- Where the framework is the work, the gain is large: the health check 2x on Actual and 3.7x on
-  LibreChat, Actual's `index.html` 5.9x, a returning browser revalidating Actual's bundle 1.9x.
-- Where a database is the work, it is smaller and still there: 1.04x to 1.26x on Actual's SQLite
-  endpoints, 1.03x to 1.11x on LibreChat's MongoDB ones, and 1.23x to 1.29x on LibreChat's with the
+- Where the framework is the work, the gain is large: the health check 3.1x on Actual and 3.6x on
+  LibreChat, Actual's `index.html` 7.5x, a returning browser revalidating Actual's bundle 2.5x.
+- Where a database is the work, it is smaller and still there: 1.06x to 1.40x on Actual's SQLite
+  endpoints, 1.03x to 1.11x on LibreChat's MongoDB ones, and 1.22x to 1.30x on LibreChat's with the
   patch.
-- With the patch, the web app itself: Actual's main bundle 27x, since it goes out as a 216 KB brotli
+- With the patch, the web app itself: Actual's main bundle 32x, since it goes out as a 216 KB brotli
   twin instead of 1.16 MB of plain JavaScript, and LibreChat's 10x.
 
 The noise of the machine, Express against a second Express, is under 1% on Actual and under 3% on
@@ -79,8 +80,8 @@ result. Every table, with req/s, latency and bytes:
 [`results/bench/report.md`](results/bench/report.md).
 
 **What it is worth in money** depends on scale, and these servers are light: a million active users
-a day on Fargate ARM is about two tasks, around $750 a year of compute. Without a change, fulmine
-takes 14% of that on Actual, and 3% on LibreChat. With the patch, 15% to 25%, and the total bill
+a day on Fargate ARM is about two tasks, $700 to $760 a year of compute. Without a change, fulmine
+takes 16% of that on Actual, and 3% on LibreChat. With the patch, 16% to 25%, and the total bill
 with outbound traffic falls 16% (LibreChat) and 24% (Actual), most of it from the web app going out
 compressed. That last part is not fulmine's alone: Express serves precompressed files too through a
 plugin, which LibreChat already uses with gzip. What fulmine adds is doing it with one option, and
