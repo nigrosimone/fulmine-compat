@@ -8,7 +8,7 @@
 set -e
 ROOT=$(pwd)
 NODE_VERSION=24.18.1
-FULMINE_VERSION=5.25.1
+FULMINE_VERSION=5.25.7
 ARCH=$(uname -m | sed 's/aarch64/arm64/;s/x86_64/x64/')
 
 if [ ! -x node24/bin/node ]; then
