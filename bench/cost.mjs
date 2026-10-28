@@ -6,6 +6,9 @@
 //   node bench/cost.mjs --users 250000
 //   node bench/cost.mjs --x86            Fargate's x86 prices instead of ARM's
 //   node bench/cost.mjs --write          also results/summary.json, what the fulmine site charts
+//
+// With results/bench/run-1, run-2, ... (one per CI job, each on its own machine) it reads them all:
+// Express is the median of the runs, every other arm the median of its ratio to Express in the same run.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -84,46 +87,90 @@ function perUserDay(r, day, bytesFrom) {
     return out;
 }
 
+function median(values) {
+    const sorted = values.filter((v) => Number.isFinite(v)).sort((a, b) => a - b);
+    if (!sorted.length) return null;
+    const mid = sorted.length >> 1;
+    return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
+/** The arms of a day, the endpoint ratios and the noise of one run directory, or null. */
+function oneRun(dir, name, day) {
+    const plain = read(path.join(dir, `${name}.json`));
+    if (!plain) return null;
+    const tuned = read(path.join(dir, `${name}.tuned.json`));
+    const both = perUserDay(plain, day, tuned);
+    if (!both?.express) return { plain, arms: null };
+    const arms = { express: both.express, fulmine: both.fulmine };
+    const t = tuned && perUserDay(tuned, day);
+    if (t) {
+        // against the Express of its own pass: on a shared machine the same server moves between passes
+        arms["fulmine + patch"] = { us: both.express.us * (t["fulmine-tuned"].us / t.express.us), bytes: t["fulmine-tuned"].bytes };
+    }
+    return {
+        plain,
+        arms,
+        // CPU per request against Express, endpoint by endpoint, without and with the patch
+        endpoints: plain.scenarios
+            .filter((s) => !s.skipped)
+            .map((s) => {
+                const ts = tuned?.scenarios.find((x) => x.name === s.name && !x.skipped);
+                return {
+                    name: s.name,
+                    what: s.what,
+                    plain: s.summary.usPerReq.express / s.summary.usPerReq.fulmine,
+                    patch: ts ? ts.summary.usPerReq.express / ts.summary.usPerReq["fulmine-tuned"] : null
+                };
+            }),
+        noise: read(path.join(dir, `${name}.null.json`))?.scenarios.map((s) => Math.abs(1 - s.summary.usPerReq.ratio))
+    };
+}
+
+const RUN_DIRS = fs.existsSync(RESULTS) ? fs.readdirSync(RESULTS).filter((d) => /^run-\d+$/.test(d)).map((d) => path.join(RESULTS, d)) : [];
+const DIRS = RUN_DIRS.length ? RUN_DIRS : [RESULTS];
+
 // the same figures for a page to draw, written only with --write
-const summary = { date: null, prices: null, projects: [] };
+const summary = { date: null, prices: null, runs: DIRS.length, projects: [] };
 
 for (const [name, day] of Object.entries(DAY)) {
-    const plain = read(path.join(RESULTS, `${name}.json`));
-    if (!plain) continue;
-    const tuned = read(path.join(RESULTS, `${name}.tuned.json`));
-    const both = perUserDay(plain, day, tuned);
-    const arms = { express: both?.express, fulmine: both?.fulmine };
-    if (tuned) arms["fulmine + patch"] = perUserDay(tuned, day)?.["fulmine-tuned"];
-    if (!arms.express) {
+    const runs = DIRS.map((dir) => oneRun(dir, name, day)).filter(Boolean);
+    if (!runs.length) continue;
+    const plain = runs[0].plain;
+    if (runs.some((r) => !r.arms)) {
         console.log(`${plain.title}: a scenario of the day is missing from the results\n`);
         continue;
     }
-    summary.date ??= plain.env.date.slice(0, 10);
+    const expressUs = median(runs.map((r) => r.arms.express.us));
+    const arms = {};
+    // how far apart the runs are, as CPU saved against Express: what a single run could have said
+    const spread = {};
+    for (const arm of Object.keys(runs[0].arms)) {
+        if (runs.some((r) => !r.arms[arm])) continue;
+        const ratios = runs.map((r) => r.arms[arm].us / r.arms.express.us);
+        arms[arm] = { us: expressUs * median(ratios), bytes: median(runs.map((r) => r.arms[arm].bytes)) };
+        if (arm !== "express") spread[arm] = [1 - Math.max(...ratios), 1 - Math.min(...ratios)];
+    }
+    summary.date ??= runs.map((r) => r.plain.env.date.slice(0, 10)).sort().at(-1);
     const entry = {
         name,
         title: plain.title,
         express: plain.env.express,
         fulmine: plain.env.fulmine,
-        day: Object.fromEntries(Object.entries(arms).filter(([, v]) => v).map(([arm, v]) => [arm, { cpuMs: v.us / 1000, mbOut: v.bytes / 1048576 }])),
-        // CPU per request against Express, endpoint by endpoint, without and with the patch
-        endpoints: plain.scenarios
-            .filter((s) => !s.skipped)
-            .map((s) => ({
-                name: s.name,
-                what: s.what,
-                plain: s.summary.usPerReq.express / s.summary.usPerReq.fulmine,
-                patch: (() => {
-                    const t = tuned?.scenarios.find((x) => x.name === s.name && !x.skipped);
-                    return t ? t.summary.usPerReq.express / t.summary.usPerReq["fulmine-tuned"] : null;
-                })()
-            })),
-        noise: read(path.join(RESULTS, `${name}.null.json`))?.scenarios.map((s) => Math.abs(1 - s.summary.usPerReq.ratio)),
+        day: Object.fromEntries(Object.entries(arms).map(([arm, v]) => [arm, { cpuMs: v.us / 1000, mbOut: v.bytes / 1048576 }])),
+        spread,
+        endpoints: runs[0].endpoints.map((e) => {
+            const all = runs.map((r) => r.endpoints.find((x) => x.name === e.name));
+            return { name: e.name, what: e.what, plain: median(all.map((x) => x?.plain)), patch: median(all.map((x) => x?.patch)) };
+        }),
+        noise: runs.some((r) => r.noise) ? runs.flatMap((r) => r.noise ?? []) : undefined,
         year: {}
     };
     summary.projects.push(entry);
-    console.log(`${plain.title}: per active user a day, ${n(Object.values(day).reduce((a, b) => a + b, 0), 1)} requests`);
+    const total = n(Object.values(day).reduce((a, b) => a + b, 0), 1);
+    console.log(`${plain.title}: per active user a day, ${total} requests${runs.length > 1 ? `, median of ${runs.length} runs` : ""}`);
     for (const [arm, v] of Object.entries(arms)) {
-        if (v) console.log(`  ${arm.padEnd(16)} ${n(v.us / 1000, 1)} ms of CPU, ${n(v.bytes / 1048576, 2)} MB out`);
+        const range = runs.length > 1 && spread[arm] ? `, runs ${n(spread[arm][0] * 100)}% to ${n(spread[arm][1] * 100)}% less` : "";
+        console.log(`  ${arm.padEnd(16)} ${n(v.us / 1000, 1)} ms of CPU, ${n(v.bytes / 1048576, 2)} MB out${range}`);
     }
     for (const users of USERS) {
         console.log(`  ${n(users)} active users, a year:`);

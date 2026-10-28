@@ -7,7 +7,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const RESULTS = path.resolve(import.meta.dirname, "..", "results", "bench");
+// BENCH_RESULTS points it at one run of a CI benchmark, results/bench/run-N
+const RESULTS = process.env.BENCH_RESULTS || path.resolve(import.meta.dirname, "..", "results", "bench");
 const only = process.argv[2];
 
 const n = (v, d = 0) => (Number.isFinite(v) ? v.toLocaleString("en-US", { maximumFractionDigits: d, minimumFractionDigits: d }) : "-");

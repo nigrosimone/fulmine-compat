@@ -1,0 +1,93 @@
+# The benchmarks of the readme on GitHub's ARM runners: 4 cores with no SMT and no turbo. Each job
+# is a machine of its own, so one job runs a whole project (Express against fulmine, the null run and
+# the patch) and three jobs per project give a median. The results come back as an artifact, to be
+# looked at and committed by hand.
+name: Benchmark
+
+on:
+  workflow_dispatch:
+    inputs:
+      fulmine:
+        description: "fulmine.js version from npm"
+        default: "5.25.12"
+      runs:
+        description: "jobs per project, each on its own machine"
+        default: "3"
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      runs: ${{ steps.runs.outputs.list }}
+    steps:
+      - id: runs
+        run: echo "list=$(seq -s, 1 '${{ inputs.runs }}' | sed 's/^/[/;s/$/]/')" >> "$GITHUB_OUTPUT"
+
+  bench:
+    needs: plan
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [actual, librechat]
+        run: ${{ fromJSON(needs.plan.outputs.runs) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tools
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -yq wrk "linux-tools-$(uname -r)" || sudo apt-get install -yq wrk linux-tools-azure
+          sudo sysctl -w kernel.perf_event_paranoid=-1
+          lscpu
+      - name: Setup
+        env:
+          FULMINE_VERSION: ${{ inputs.fulmine }}
+        # the committed results stay out of the artifact: it holds this job's files only
+        run: |
+          rm -rf results/bench
+          bash bench/setup.sh ${{ matrix.project }}
+      - name: Express against fulmine
+        run: node24/bin/node bench/bench.mjs ${{ matrix.project }}
+      - name: Express against Express
+        run: node24/bin/node bench/bench.mjs ${{ matrix.project }} --null
+      - name: Express against fulmine with the patch
+        run: node24/bin/node bench/bench.mjs ${{ matrix.project }} --tuned
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bench-${{ matrix.project }}-run-${{ matrix.run }}
+          path: results/bench/
+
+  summary:
+    needs: [plan, bench]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: bench-*
+          path: downloaded
+      - name: Medians and reports
+        run: |
+          rm -rf results/bench && mkdir -p results/bench
+          for dir in downloaded/bench-*-run-*; do
+            run="run-${dir##*-run-}"
+            mkdir -p "results/bench/$run"
+            cp "$dir"/*.json "results/bench/$run/"
+          done
+          for dir in results/bench/run-*; do
+            BENCH_RESULTS="$dir" node bench/report.mjs > "$dir/report.md"
+          done
+          node bench/cost.mjs --write | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: results
+          path: results/
