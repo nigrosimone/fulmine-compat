@@ -130,7 +130,7 @@ const RUN_DIRS = fs.existsSync(RESULTS) ? fs.readdirSync(RESULTS).filter((d) => 
 const DIRS = RUN_DIRS.length ? RUN_DIRS : [RESULTS];
 
 // the same figures for a page to draw, written only with --write
-const summary = { date: null, prices: null, runs: DIRS.length, projects: [] };
+const summary = { date: null, machine: null, prices: null, runs: DIRS.length, projects: [] };
 
 for (const [name, day] of Object.entries(DAY)) {
     const runs = DIRS.map((dir) => oneRun(dir, name, day)).filter(Boolean);
@@ -151,6 +151,7 @@ for (const [name, day] of Object.entries(DAY)) {
         if (arm !== "express") spread[arm] = [1 - Math.max(...ratios), 1 - Math.min(...ratios)];
     }
     summary.date ??= runs.map((r) => r.plain.env.date.slice(0, 10)).sort().at(-1);
+    summary.machine ??= plain.env.cpu;
     const entry = {
         name,
         title: plain.title,

@@ -1,5 +1,6 @@
 {
   "date": "2026-10-28",
+  "machine": "Neoverse-N2",
   "prices": {
     "cloud": "AWS Fargate ARM, us-east-1",
     "taskHour": 0.0395,
