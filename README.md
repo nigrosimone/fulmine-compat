@@ -46,44 +46,44 @@ commit their submodule points to.
 
 ### Their endpoints
 
-Measured on one ARM core (Oracle Cloud A1, Neoverse N1), Node 24, fulmine 5.25.7 against Express
-5.3.0, how in Part 2. Express 5.3.0 is the newest in the range both projects ask for, and
+Measured on GitHub's ARM runners (Neoverse N2, one core for the server), Node 24, fulmine 5.25.12
+against Express 5.3.0, the median of three runs on three machines, how in Part 2. Express 5.3.0 is the newest in the range both projects ask for, and
 `bench/setup.sh` puts it in their lockfile. CPU per request, summed over a day of use of one active
 user, the mix in [`bench/cost.mjs`](bench/cost.mjs):
 
 | | Actual Budget | LibreChat |
 | --- | ---: | ---: |
-| Express | 98.3 ms | 88.1 ms |
-| fulmine, no change | 83.0 ms, **-16%** | 86.9 ms, **-1%** |
-| fulmine and the patch | 83.4 ms, **-15%** | 64.9 ms, **-26%** |
+| Express | 60.4 ms | 62.6 ms |
+| fulmine, no change | 49.1 ms, **-19%** | 59.0 ms, **-6%** |
+| fulmine and the patch | 48.9 ms, **-19%** | 46.4 ms, **-26%** |
 | the patch | [1 line, and 2 at build](patches/actual.diff) | [5 lines](patches/librechat.diff) |
 
-On October 9, with fulmine 5.22.0 against Express 5.2.1 and before the GC settings of Part 2, it was
--11% and -12% on Actual, -9% and -28% on LibreChat. Since then fulmine is faster on static files
-and, from 5.25.1, on `req.ip` behind a list of trusted proxies, which Actual's rate limiter reads
-twice a request; Express 5.3 is faster on LibreChat, and LibreChat's figures no longer depend on the
-GC state each server happened to be in.
+The three runs agree within 1% on each of these figures. Until October 21 they came from one Oracle
+Cloud A1 machine (Neoverse N1), which is gone now: there fulmine 5.25.7 was -16% and -15% on Actual,
+-1% and -26% on LibreChat. The milliseconds are lower here because the core is faster, the
+percentages are what carries over.
 
 Endpoint by endpoint, CPU per request against Express:
 
-- Where the framework is the work, the gain is large: the health check 3.2x on Actual and 3.5x on
-  LibreChat, Actual's `index.html` 7.8x, a returning browser revalidating Actual's bundle 2.5x.
-- Where a database is the work, it is smaller and still there: 1.02x to 1.38x on Actual's SQLite
-  endpoints, 1.02x to 1.13x on LibreChat's MongoDB ones, and 1.20x to 1.34x on LibreChat's with the
+- Where the framework is the work, the gain is large: the health check 2.9x on Actual and 3.5x on
+  LibreChat, Actual's `index.html` 8.2x, a returning browser revalidating Actual's bundle 2.2x.
+- Where a database is the work, it is smaller and still there: 1.05x to 1.40x on Actual's SQLite
+  endpoints, 1.04x to 1.09x on LibreChat's MongoDB ones, and 1.22x to 1.28x on LibreChat's with the
   patch.
-- With the patch, the web app itself: Actual's main bundle 33x, since it goes out as a 216 KB brotli
+- With the patch, the web app itself: Actual's main bundle 35x, since it goes out as a 216 KB brotli
   twin instead of 1.16 MB of plain JavaScript, and LibreChat's 11x.
 
-The noise of the machine, Express against a second Express, is under 1% on Actual and under 3% on
-LibreChat. So LibreChat's -1% without the patch is inside it, from one run to the next it moved
-between -1% and -3%, and everything else is a result. Every table, with req/s, latency and bytes:
-[`results/bench/report.md`](results/bench/report.md).
+The noise of the machines, Express against a second Express in the same job, is under 2.5% on
+every endpoint but Actual's plain 1.2 MB bundle, where it reaches 6%. So everything above is a
+result, LibreChat's -6% without the patch too. Every table, with req/s, latency and bytes, one per
+run: [run 1](results/bench/run-1/report.md), [run 2](results/bench/run-2/report.md),
+[run 3](results/bench/run-3/report.md).
 
 **What it is worth in money** depends on scale, and these servers are light: a million active users
-a day on Fargate ARM is about two tasks, $690 to $760 a year of compute. Without a change, fulmine
-takes 16% of that on Actual, and on LibreChat less than the noise. With the patch, 15% to 26%, and
-the total bill with outbound traffic falls 16% (LibreChat) and 24% (Actual), most of it from the web
-app going out compressed. That last part is not fulmine's alone: Express serves precompressed files
+a day on Fargate ARM is about one task and a half, $480 to $500 a year of compute. Without a
+change, fulmine takes 19% of that on Actual and 6% on LibreChat. With the patch, 19% to 26%, and the
+total bill with outbound traffic falls 16% (LibreChat) and 30% (Actual), most of it from the web app
+going out compressed. That last part is not fulmine's alone: Express serves precompressed files
 too through a plugin, which LibreChat already uses with gzip. What fulmine adds is doing it with one
 option, and spending less CPU per file. `node bench/cost.mjs` prints the year for 10 thousand to 1
 million users, with every price and assumption at the top of the file.
@@ -198,6 +198,10 @@ n8n's endpoints are not measured: it builds its server with `http.createServer(a
 change fulmine serves it through node:http, which is a different and smaller story.
 
 ### Running the benchmarks
+
+The figures above come from the `Benchmark` workflow ([`bench.yml`](.github/workflows/bench.yml)),
+started by hand: one job per project and run, each on its own ARM runner of 4 cores with no SMT, and
+a last job that takes the medians. Its artifact is what goes in `results/`.
 
 On Linux with `wrk`, `perf` and `taskset`, from the repository root:
 

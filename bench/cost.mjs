@@ -18,7 +18,7 @@ const argv = process.argv.slice(2);
 const flag = (name, fallback) => (argv.includes("--" + name) ? Number(argv[argv.indexOf("--" + name) + 1]) : fallback);
 
 // AWS Fargate, Linux, us-east-1, on demand, October 2026, per vCPU-hour and per GB-hour. The
-// machine these results come from is an ARM Neoverse N1, the core of AWS Graviton2, so ARM is the
+// machines these results come from are ARM, Neoverse N2 (GitHub's ARM runners), so ARM is the
 // default; x86 costs more and its CPU time per request was not measured here.
 const X86 = argv.includes("--x86");
 const VCPU_HOUR = X86 ? 0.04048 : 0.03238;
